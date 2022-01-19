@@ -1,60 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <title>Profile edit</title>
+    <link rel="stylesheet" href="../../styles/editProfile/style.css">
 </head>
 
 <body>
-<div id="profile-edit-save">
-    <button id="editSave">Сохранить профиль</button>
-</div>
-<div id="profile-edit-area">
-    <form>
-        <div id="edit-area-left">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="edit-title">Логин:</td>
-                    <td><input type="text" class="profileInputBox"/></td>
-                </tr>
-                <tr>
-                    <td class="edit-title">Фамилия:</td>
-                    <td><input type="text" class="profileInputBox"/></td>
-                </tr>
-                <tr>
-                    <td class="edit-title">Имя:</td>
-                    <td><input type="text" class="profileInputBox"/></td>
-                </tr>
-                <tr>
-                    <td class="edit-title">Отчество:</td>
-                    <td><input type="text" class="profileInputBox"/></td>
-                </tr>
-                <tr>
-                    <td class="edit-title">E-mail:</td>
-                    <td><input type="text" class="profileInputBox"/></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="edit-area-right">
-            <table>
-                <tbody>
-
-                <td class="edit-title">Телефон:</td>
+<div class="profile-edit-area">
+    <div class="edit-area">
+        <table>
+            <tbody>
+            <tr>
+                <td class="edit-title">Логин:</td>
                 <td><input type="text" class="profileInputBox"/></td>
-                </tr>
-                <tr>
-                    <td class="edit-title">О себе:</td>
-                    <td><textarea class="profileInputBox"></textarea></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </form>
+            </tr>
+            <tr>
+                <td class="edit-title">Фамилия:</td>
+                <td><input type="text" class="profileInputBox"/></td>
+            </tr>
+            <tr>
+                <td class="edit-title">Имя:</td>
+                <td><input type="text" class="profileInputBox"/></td>
+            </tr>
+            <tr>
+                <td class="edit-title">Отчество:</td>
+                <td><input type="text" class="profileInputBox"/></td>
+            </tr>
+            <tr>
+                <td class="edit-title">E-mail:</td>
+                <td><input type="text" class="profileInputBox"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="edit-area-right">
+        <table>
+            <tbody>
+            <td class="edit-title">Телефон:</td>
+            <td><input type="text" class="profileInputBox"/></td>
+            </tr>
+            <tr>
+                <td class="edit-title">О себе:</td>
+                <td><textarea class="profileInputBox"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button class="editSave">Сохранить профиль</button>
 </div>
 </body>

@@ -1,0 +1,56 @@
+body {
+    padding: 5%;
+    margin: 0;
+    font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 100%;
+    color: #333;
+    background: url("img/main2.jpg")
+}
+
+.editSave {
+    display:flex;
+    margin: 0 auto;
+    border:none;
+    border-radius:5px;
+    padding:10px 20px;
+    background-color:#2699c7;
+    color:#fff;
+    font-size:14px;
+    outline: none;
+}
+
+.profile-edit-area {
+    width:800px;
+    margin: 0 auto;
+}
+
+.edit-area {
+    width:400px;
+    float:left;
+    box-sizing:border-box;
+}
+
+.profile-edit-area {
+    margin: 50px auto 10px;
+}
+
+.edit-title {
+    padding-top:15px;
+}
+
+.profileInputBox {
+    width:200px;
+    height:auto;
+    margin:10px;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background-color: #bbbbbb;
+    font-size:16px;
+    outline: none;
+}
+
+.edit-area-right textarea {
+    height:200px;
+    resize:none;
+}
