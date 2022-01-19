@@ -11,7 +11,7 @@ body{
     background: url("main2.jpg");
 }
 
-.navbar{
+.feed_header{
     position: fixed;
     top: 0;
     left: 0;
@@ -24,7 +24,7 @@ body{
     padding: 5px 0;
 }
 
-.nav-wrapper{
+.feed_header_wrapper{
     width: 70%;
     max-width: 1000px;
     height: 100%;
@@ -33,12 +33,12 @@ body{
     align-items: center;
 }
 
-.brand-img{
+.feed_header_wrapper_brand-img{
     height: 100%;
     margin-top: 5px;
 }
 
-.search-box{
+.feed_header_wrapper_search-box{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -50,7 +50,7 @@ body{
     text-align: center;
 }
 
-.nav-items{
+.feed_header_wrapper_nav-items{
     height: 22px;
     position: relative;
 }
@@ -85,7 +85,7 @@ body{
     grid-gap: 30px;
 }
 
-.feed-left-col{
+.feed-posts{
     display: flex;
     flex-direction: column;
 }
@@ -143,7 +143,7 @@ body{
     margin-top: 40px;
 }
 
-.info{
+.feed-post_info{
     width: 100%;
     height: 60px;
     display: flex;
@@ -152,7 +152,7 @@ body{
     padding: 0 20px;
 }
 
-.info .username{
+.feed-post_info .username{
     width: auto;
     font-weight: bold;
     color: #000;
@@ -160,24 +160,24 @@ body{
     margin-left: 10px;
 }
 
-.info .options{
+.feed-post_info .options{
     height: 10px;
     cursor: pointer;
 }
 
-.info .user{
+.feed-post_info .feed-post_info_user{
     display: flex;
     align-items: center;
 }
 
-.info .profile-pic{
+.feed-post_info .profile-pic{
     height: 40px;
     width: 40px;
     padding: 0;
     background: none;
 }
 
-.info .profile-pic img{
+.feed-post_info .profile-pic img{
     border: none;
 }
 
@@ -187,16 +187,16 @@ body{
     object-fit: cover;
 }
 
-.post-content{
+.feed-post_post_content{
     width: 100%;
     padding: 20px;
 }
 
-.likes{
+.feed-post_post_content_likes{
     font-weight: bold;
 }
 
-.description{
+.feed-post_post_content_description{
     margin: 10px 0;
     font-size: 14px;
     line-height: 20px;
@@ -207,11 +207,11 @@ body{
     margin-right: 10px;
 }
 
-.post-time{
+.feed-post_post_content_post_time{
     font-size: 12px;
 }
 
-.comment-wrapper{
+.feed-post_post_comment{
     width: 100%;
     height: 50px;
     border-radius: 1px;
@@ -220,11 +220,11 @@ body{
     align-items: center;
 }
 
-.comment-wrapper .icon{
+.feed-post_post_comment .icon{
     height: 30px;
 }
 
-.comment-box{
+.feed-post_post_comment_box{
     width: 80%;
     height: 100%;
     border: none;
@@ -244,7 +244,7 @@ body{
     color: #2699c7;
 }
 
-.reaction-wrapper{
+.feed-post_post_content_reaction{
     width: 100%;
     height: 50px;
     display: flex;
@@ -252,17 +252,17 @@ body{
     align-items: center;
 }
 
-.reaction-wrapper .icon{
+.feed-post_post_content_reaction .icon{
     height: 25px;
     margin: 0;
     margin-right: 20px;
 }
 
-.reaction-wrapper .icon.save{
+.feed-post_post_content_reaction .icon.save{
     margin-left: auto;
 }
 
-.feed-right-col{
+.feed-profile{
     padding: 20px;
 }
 
@@ -305,7 +305,7 @@ body{
     font-size: 12px;
 }
 
-.suggestion-text{
+.feed-profile_suggestion_text{
     font-size: 14px;
     font-weight: 700;
     margin: 20px 0;

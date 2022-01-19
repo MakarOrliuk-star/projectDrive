@@ -1,5 +1,4 @@
 body {
-    padding: 5%;
     margin: 0;
     font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 100%;
@@ -9,7 +8,6 @@ body {
 
 .editSave {
     display:flex;
-    margin: 0 auto;
     border:none;
     border-radius:5px;
     padding:10px 20px;
@@ -17,24 +15,37 @@ body {
     color:#fff;
     font-size:14px;
     outline: none;
+    position:relative;
+    left:30px;
+    top:20px;
 }
-
-.profile-edit-area {
-    width:800px;
-    margin: 0 auto;
+.profile_edit_header_pic{
+    display: inline-block;
+    padding: 8px;
+    background: linear-gradient(130deg, #74b9ff, #00ad5f);
+    margin: auto;
+    border-radius: 50%;
+    background-size: 100% 100%;
 }
-
-.edit-area {
+.profile_edit_header_pic img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.profile_edit_area {
     width:400px;
     float:left;
     box-sizing:border-box;
 }
 
-.profile-edit-area {
+.profile_edit {
     margin: 50px auto 10px;
+    width:800px;
+    position: relative;
 }
 
-.edit-title {
+.profile_edit_area_title {
     padding-top:15px;
 }
 
@@ -53,4 +64,15 @@ body {
 .edit-area-right textarea {
     height:200px;
     resize:none;
+}
+
+.profile_edit_area_image{
+    width: 150px;
+    background-color: #282928;
+    color: #fff;
+    padding: 10px;
+    border: 0;
+    border-radius: 15px;
+    box-sizing: border-box;
+    display: block;
 }

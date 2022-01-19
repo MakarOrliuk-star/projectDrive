@@ -7,18 +7,18 @@ body {
     justify-content: center;
 }
 
-.profile-card {
+.profile_card {
     width: 400px;
     text-align: center;
     border-radius: 8px;
 }
 
-.card-header {
+.profile_card_header {
     background: #2c3a47;
     padding: 60px 40px;
 }
 
-.pic {
+.profile_card_header_pic {
     display: inline-block;
     padding: 8px;
     background: linear-gradient(130deg, #74b9ff, #00ad5f);
@@ -27,64 +27,82 @@ body {
     background-size: 100% 100%;
 }
 
-.pic img {
+.profile_card_header_pic img {
     display: block;
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
 
-.name {
+.profile_card_name {
     color: #f2f2f2;
     font-size: 28px;
     font-weight: 600;
     margin: 10px 0;
 }
 
-.desc {
+.profile_card_desc {
     font-size: 18px;
     color: #00ad5f;
 }
 
-.sm {
+.profile_card_sm {
     display: flex;
     justify-content: center;
     margin: 20px 0;
 }
 
-.contact-btn {
+.sm__fab-icon{
+    color: #00ad5f;
+    width: 48px;
+    height: 48px;
+    margin: 30px 18px 5px 5px;
+    display: block;
+    text-align: center;
+    font-size: 25px;
+    float: left;
+    border-radius: 30px;
+}
+.sm__fab-image{
+    width: 48px;
+    height: 48px;
+    margin: 0;
+}
+.profile-card_sm__fab-image__border{
+    border-radius: 40px;
+}
+.profile_card_header_contact-btn {
     display: inline-block;
     padding: 12px 50px;
     color: #00ad5f;
     border: 2px solid #00ad5f;
     border-radius: 6px;
     margin-top: 16px;
-    transition: 0.3s linear;
 }
 
-.card-footer {
+.profile_card_footer {
     background: #f4f4f4;
     padding: 60px 10px;
 }
 
-.numbers {
+.profile_card_footer_numbers {
     display: flex;
     align-items: center;
 }
 
-.item {
+.profile_card_footer_numbers_item {
     flex: 1;
     font-size: 13px;
     color: #00ad5f;
 }
 
-.item span {
+.profile_card_footer_numbers_item span {
     display: block;
     color: #2c3a47;
     font-size: 30px;
 }
 
-.border {
+.profile_card_footer_numbers_border {
     width: 1px;
     height: 30px;
     background: #bbb;
