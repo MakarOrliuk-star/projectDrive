@@ -7,143 +7,116 @@
 </head>
 <body>
 
-<nav class="feed_header">
-    <div class="feed_header_wrapper">
-        <img src="../../styles/feed/img/logo.PNG" class="feed_header_wrapper_brand-img" alt="">
-        <input type="text" class="feed_header_wrapper_search-box" placeholder="search">
-        <div class="feed_header_wrapper_nav-items">
-            <img src="../../styles/feed/img/home.PNG" class="icon" alt="">
-            <img src="../../styles/feed/img/explore.PNG" class="icon" alt="">
-            <img src="../../styles/feed/img/like.PNG" class="icon" alt="">
-            <div class="icon user-profile"></div>
+<div class="feed">
+    <nav class="feed_header">
+        <div class="feed_wrapper">
+            <img src="../../styles/feed/img/logo.PNG" class="feed_brand-image" alt="">
+            <input type="text" class="feed_search-box" placeholder="search">
+            <div class="feed_item-links">
+                <img src="../../styles/feed/img/home.PNG" class="feed_icon-profile" alt="">
+                <img src="../../styles/feed/img/explore.PNG" class="feed_icon-profile" alt="">
+                <img src="../../styles/feed/img/like.PNG" class="feed_icon-profile" alt="">
+                <div class="feed_icon-profile user-profile"></div>
+            </div>
         </div>
-    </div>
-</nav>
-
-<section class="main">
-    <div class="feed">
-        <div class="feed-posts">
-            <div class="button-create">
-                <button class="button-create-post" name="foo" value="upvote">Create post</button>
+    </nav>
+    <div class="feed_main">
+        <div class="feed_posts">
+            <div class="feed_button-create">
+                <button class="feed_button-create-post" name="foo" value="upvote">Create post</button>
             </div>
-            <div class="feed-post">
-                <div class="feed-post_info">
-                    <div class="feed-post_info_user">
-                        <div class="profile-pic"><img src="../../styles/feed/img/cover 1.png" alt=""></div>
-                        <p class="username">User 1</p>
+            <div class="feed_post">
+                <div class="feed_post-info">
+                    <div class="feed_post-info-user">
+                        <div class="feed_profile-pic"><img src="../../styles/feed/img/cover 1.png" alt=""></div>
+                        <p class="feed_username-post">User 1</p>
                     </div>
-                    <img src="" class="options" alt="">
+                    <img src="" class="feed_options" alt="">
                 </div>
-                <img src="../../styles/feed/img/cover 1.png" class="post-image" alt="">
-                <div class="feed-post_post_content">
-                    <div class="feed-post_post_content_reaction">
-                        <img src="../../styles/feed/img/like.PNG" class="icon" alt="">
-                        <img src="" class="icon" alt="">
-                        <img src="../../styles/feed/img/send.PNG" class="icon" alt="">
-                        <img src="" class="save icon" alt="">
+                <img src="../../styles/feed/img/cover 1.png" class="post_image-profile" alt="">
+                <div class="feed_post-content">
+                    <div class="feed_post-content-reaction">
+                        <img src="../../styles/feed/img/like.PNG" class="feed_icon-profile" alt="">
+                        <img src="" class="feed_icon-profile" alt="">
+                        <img src="../../styles/feed/img/send.PNG" class="feed_icon-profile" alt="">
+                        <img src="" class="save feed_icon-profile" alt="">
                     </div>
-                    <p class="feed-post_post_content_likes">1,012 likes</p>
-                    <p class="feed-post_post_content_description"><span>username </span> Тут какой-то текст</p>
-                    <p class="feed-post_post_content_post_time">2 minutes ago</p>
+                    <p class="feed_post-content-likes">1,012 likes</p>
+                    <p class="feed_post-content-description"><span>username </span> Тут какой-то текст</p>
+                    <p class="feed_post-content-time">2 minutes ago</p>
                 </div>
-                <div class="feed-post_post_comment">
-                    <img src="" class="icon" alt="">
-                    <input type="text" class="feed-post_post_comment_box" placeholder="Add a comment">
-                    <button class="comment-btn">post</button>
-                </div>
-            </div>
-            <div class="feed-post">
-                <div class="feed-post_info">
-                    <div class="feed-post_info_user">
-                        <div class="profile-pic"><img src="../../styles/feed/img/cover 3.png" alt=""></div>
-                        <p class="username">User 2</p>
-                    </div>
-                    <img src="" class="options" alt="">
-                </div>
-                <img src="../../styles/feed/img/cover 3.png" class="post-image" alt="">
-                <div class="feed-post_post_content">
-                    <div class="feed-post_post_content_reaction">
-                        <img src="../../styles/feed/img/like.PNG" class="icon" alt="">
-                        <img src="" class="icon" alt="">
-                        <img src="../../styles/feed/img/send.PNG" class="icon" alt="">
-                        <img src="" class="save icon" alt="">
-                    </div>
-                    <p class="feed-post_post_content_likes">1,012 likes</p>
-                    <p class="feed-post_post_content_description"><span>username </span> Тут какой-то текст</p>
-                    <p class="feed-post_post_content_post_time">2 minutes ago</p>
-                </div>
-                <div class="feed-post_post_comment">
-                    <img src="" class="icon" alt="">
-                    <input type="text" class="feed-post_post_comment_box" placeholder="Add a comment">
-                    <button class="comment-btn">post</button>
+                <div class="feed_post-comment">
+                    <img src="" class="feed_icon-profile" alt="">
+                    <input type="text" class="feed_post-comment-add" placeholder="Add a comment">
+                    <button class="feed_post-comment-btn">post</button>
                 </div>
             </div>
         </div>
-        <div class="feed-profile">
-            <div class="profile-card">
-                <div class="profile-pic">
+         <div class="feed_profile-menu">
+            <div class="feed_profile-card">
+                <div class="feed_profile-pic">
                     <img src="../../styles/feed/img/cover 3.png" alt="">
                 </div>
                 <div>
-                    <p class="username">Makar Orliuk</p>
-                    <p class="sub-text">@VM_tekken</p>
+                    <p class="feed_username-profile">Makar Orliuk</p>
+                    <p class="feed_profile-sub-text">@VM_tekken</p>
                 </div>
-                <button class="action-btn">Follow</button>
+                <button class="feed_profile-action-btn">Follow</button>
             </div>
-            <p class="feed-profile_suggestion_text">Suggestions for you</p>
-            <div class="profile-card">
-                <div class="profile-pic">
+            <p class="feed_profile-suggestion-text">Suggestions for you</p>
+            <div class="feed_profile-card">
+                <div class="feed_profile-pic">
                     <img src="" alt="">
                 </div>
                 <div>
-                    <p class="username">Channel 1</p>
-                    <p class="sub-text">followed bu user</p>
+                    <p class="feed_username-profile">Channel 1</p>
+                    <p class="feed_profile-sub-text">followed bu user</p>
                 </div>
-                <button class="action-btn">follow</button>
+                <button class="feed_profile-action-btn">follow</button>
             </div>
-            <div class="profile-card">
-                <div class="profile-pic">
+            <div class="feed_profile-card">
+                <div class="feed_profile-pic">
                     <img src="" alt="">
                 </div>
                 <div>
-                    <p class="username">Channel 2</p>
-                    <p class="sub-text">followed bu user</p>
+                    <p class="feed_username-profile">Channel 1</p>
+                    <p class="feed_profile-sub-text">followed bu user</p>
                 </div>
-                <button class="action-btn">follow</button>
+                <button class="feed_profile-action-btn">follow</button>
             </div>
-            <div class="profile-card">
-                <div class="profile-pic">
+            <div class="feed_profile-card">
+                <div class="feed_profile-pic">
                     <img src="" alt="">
                 </div>
                 <div>
-                    <p class="username">Channel 3</p>
-                    <p class="sub-text">followed bu user</p>
+                    <p class="feed_username-profile">Channel 1</p>
+                    <p class="feed_profile-sub-text">followed bu user</p>
                 </div>
-                <button class="action-btn">follow</button>
+                <button class="feed_profile-action-btn">follow</button>
             </div>
-            <div class="profile-card">
-                <div class="profile-pic">
+            <div class="feed_profile-card">
+                <div class="feed_profile-pic">
                     <img src="" alt="">
                 </div>
                 <div>
-                    <p class="username">Channel 4</p>
-                    <p class="sub-text">followed bu user</p>
+                    <p class="feed_username-profile">Channel 1</p>
+                    <p class="feed_profile-sub-text">followed bu user</p>
                 </div>
-                <button class="action-btn">follow</button>
+                <button class="feed_profile-action-btn">follow</button>
             </div>
-            <div class="profile-card">
-                <div class="profile-pic">
+            <div class="feed_profile-card">
+                <div class="feed_profile-pic">
                     <img src="" alt="">
                 </div>
                 <div>
-                    <p class="username">Channel 5</p>
-                    <p class="sub-text">followed bu user</p>
+                    <p class="feed_username-profile">Channel 1</p>
+                    <p class="feed_profile-sub-text">followed bu user</p>
                 </div>
-                <button class="action-btn">follow</button>
+                <button class="feed_profile-action-btn">follow</button>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 </body>
 </html>
