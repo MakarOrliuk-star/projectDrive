@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="../../styles/feed/style.css">
 </head>
 <body>
-
 <div class="feed">
     <nav class="feed_header">
         <div class="feed_wrapper">
@@ -20,39 +19,46 @@
             </div>
         </div>
     </nav>
+
     <div class="feed_main">
-        <div class="feed_posts">
-            <div class="feed_button-create">
-                <button class="feed_button-create-post" name="foo" value="upvote">Create post</button>
-            </div>
-            <div class="feed_post">
-                <div class="feed_post-info">
-                    <div class="feed_post-info-user">
-                        <div class="feed_profile-pic"><img src="../../styles/feed/img/cover 1.png" alt=""></div>
-                        <p class="feed_username-post">User 1</p>
+        <div class="create-new-post-bg">
+            <div class="create-new-post">
+                <h3>Create new post</h3>
+                <div class="create-new-post_group-name">
+                    <label class="create-new-post_label">Title</label>
+                    <div class="create-new-post_input">
+                        <input type="text" class="create-new-post_form-control">
                     </div>
-                    <img src="" class="feed_options" alt="">
                 </div>
-                <img src="../../styles/feed/img/cover 1.png" class="post_image-profile" alt="">
-                <div class="feed_post-content">
-                    <div class="feed_post-content-reaction">
-                        <img src="../../styles/feed/img/like.PNG" class="feed_icon-profile" alt="">
-                        <img src="" class="feed_icon-profile" alt="">
-                        <img src="../../styles/feed/img/send.PNG" class="feed_icon-profile" alt="">
-                        <img src="" class="save feed_icon-profile" alt="">
+                <div class="create-new-post_group-name">
+                    <label class="create-new-post_label">Your image</label>
+                    <div class="create-new-post_input">
+                        <input type="file" id="inpFile" class="create-new-post_form-control">
                     </div>
-                    <p class="feed_post-content-likes">1,012 likes</p>
-                    <p class="feed_post-content-description"><span>username </span> Тут какой-то текст</p>
-                    <p class="feed_post-content-time">2 minutes ago</p>
                 </div>
-                <div class="feed_post-comment">
-                    <img src="" class="feed_icon-profile" alt="">
-                    <input type="text" class="feed_post-comment-add" placeholder="Add a comment">
-                    <button class="feed_post-comment-btn">post</button>
+                <div class="create-new-post_group-name">
+                    <label class="create-new-post_label">Your comment</label>
+                    <div class="create-new-post_input">
+                        <input type="text" class="create-new-post_form-control">
+                    </div>
                 </div>
+                <div class="create-new-post_group-name">
+                    <button type="reset" class="create-new-post create-new-post_button create-new-post_primary-color">
+                        Send
+                        Message
+                    </button>
+                </div>
+                <span class="create-new-post_close">X</span>
             </div>
         </div>
-         <div class="feed_profile-menu">
+
+        <div class="feed_posts">
+            <div class="feed_button-create">
+                <button type="button" class="feed_button-create-post" name="foo" value="upvote">Create post</button>
+            </div>
+        </div>
+
+        <div class="feed_profile-menu">
             <div class="feed_profile-card">
                 <div class="feed_profile-pic">
                     <img src="../../styles/feed/img/cover 3.png" alt="">
@@ -118,5 +124,6 @@
     </div>
 </div>
 
+<script src="../../js/feed/modal.js"></script>
 </body>
 </html>
