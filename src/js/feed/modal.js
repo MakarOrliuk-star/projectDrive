@@ -11,10 +11,10 @@ const image = document.querySelector('.post_image-profile')
 
 
 const newCreatePost = (image, title, comment, id) => {
-        const post = document.createElement('div')
-        post.classList.add('feed_post')
-        post.id = id
-        post.insertAdjacentHTML('afterbegin', `
+    const post = document.createElement('div')
+    post.classList.add('feed_post')
+    post.id = id
+    post.insertAdjacentHTML('afterbegin', `
         <div class="feed_post-info">         
                 <div class="feed_post-info-user">
                         <div class="feed_profile-pic"><img src="../../styles/feed/img/cover 1.png" alt=""></div>
@@ -40,79 +40,77 @@ const newCreatePost = (image, title, comment, id) => {
                     <button type="button" class="feed_delete-post">Delete post</button>  
                     <button type="button" class="feed_edit-post">Edit post</button>
                  </div>`
-        )
+    )
 
-        feedMainPost.appendChild(post)
-        return post
+    feedMainPost.appendChild(post)
+    return post
 }
 
 
 openModalButton.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        newPost.classList.add('active'); 
+    e.preventDefault();
+    newPost.classList.add('active');
 
-        const closeSubmitWindow = document.querySelector('.create-new-post_close')
-        closeSubmitWindow.addEventListener('click', ()=> {
-                newPost.classList.remove('active'); 
-        });
-         
+    const closeSubmitWindow = document.querySelector('.create-new-post_close')
+    closeSubmitWindow.addEventListener('click', () => {
+        newPost.classList.remove('active');
+    });
+
 });
 
 function getPostData() {
-     const inputStore = {}
-     inputStore.id = new Date()
-     inputStore.title = document.querySelectorAll('.create-new-post_form-control')[0].value
-     inputStore.comment =  document.querySelectorAll('.create-new-post_form-control')[2].value
-     inputStore.imageSrc = globalImageSrc
-     console.log(inputStore)
+    const inputStore = {}
+    inputStore.id = new Date()
+    inputStore.title = document.querySelectorAll('.create-new-post_form-control')[0].value
+    inputStore.comment = document.querySelectorAll('.create-new-post_form-control')[2].value
+    inputStore.imageSrc = globalImageSrc
+    if (inputStore.title === '' || inputStore.comment === '') {
+        return
+    }
+    console.log(inputStore)
 
-     return inputStore
+    return inputStore
 }
 
 let globalImageSrc = ''
 inpFile.addEventListener("change", function () {
-        const file = this.files[0];
-        console.log(file)
-        if (file) {
+    const file = this.files[0];
+    console.log(file)
+    if (file) {
         const reader = new FileReader();
-        
-        reader.addEventListener("load", function () 
-        {
-        // convert image file to base64 string
-        globalImageSrc = reader.result;
 
-        }, false); 
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            globalImageSrc = reader.result;
 
-              reader.readAsDataURL(file);
+        }, false);
 
-        } else {
-             // image.setAttribute("src", "")
-        }
+        reader.readAsDataURL(file);
+
+    } else {
+        // image.setAttribute("src", "")
+    }
 });
 
+submitModalButton.addEventListener('click', (e) => {
+    e.preventDefault();
 
-submitModalButton.addEventListener('click',(e) => {
-        e.preventDefault();
+    newPost.classList.remove('active');
+    const postData = getPostData()
+    newCreatePost(postData.imageSrc, postData.title, postData.comment, postData.id)
 
-        newPost.classList.remove('active');
-        
-        const postData = getPostData()
-        newCreatePost(postData.imageSrc, postData.title ,postData.comment, postData.id)
+    for (const clearInputs of document.querySelectorAll('.create-new-post_form-control')) {
+        clearInputs.value = ''
+    }
 
-        let postId = postData.id
+    let postId = postData.id
 
-        for(const clearInputs of document.querySelectorAll('.create-new-post_form-control')){
-                clearInputs.value = ''
-        }
+    const postWithButton = document.getElementById(postId)
 
-        const postWithButton = document.getElementById(postId)
-
-        const buttonId = postWithButton.querySelector('.feed_delete-post')
-        buttonId.addEventListener('click', (e) => {
-                postWithButton.parentNode.removeChild(postWithButton);
-        })
-
-
+    const buttonId = postWithButton.querySelector('.feed_delete-post')
+    buttonId.addEventListener('click', (e) => {
+        postWithButton.parentNode.removeChild(postWithButton);
+    })
 });
 
 
