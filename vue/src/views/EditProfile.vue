@@ -1,0 +1,31 @@
+<template>
+  <div class="profile-edit">
+    <div class="profile-edit_area">
+      <div class="profile-edit_pic">
+        <img src="" alt="">
+      </div>
+      <a href="#" class="profile-edit_link">Изменить аватар</a>
+      <div class="profile-edit_title">Логин:</div>
+      <input type="text" class="profile-edit_input"/>
+
+      <div class="profile-edit_title">Фамилия:</div>
+      <input type="text" class="profile-edit_input"/>
+
+      <div class="profile-edit_title">Имя:</div>
+      <input type="text" class="profile-edit_input"/>
+
+      <div class="profile-edit_title">Отчество:</div>
+      <input type="text" class="profile-edit_input"/>
+
+      <div class="profile-edit_title">E-mail:</div>
+      <input type="text" class="profile-edit_input"/>
+
+      <div class="profile-edit_title">Телефон:</div>
+      <input type="text" class="profile-edit_input"/>
+
+      <div class="profile-edit_title">О себе:</div>
+      <textarea class="profile-edit_input"></textarea>
+      <button class="profile-edit_edit-save">Сохранить профиль</button>
+    </div>
+  </div>
+</template>

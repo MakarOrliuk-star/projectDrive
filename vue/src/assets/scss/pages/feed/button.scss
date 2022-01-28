@@ -1,0 +1,13 @@
+.feed_posts{
+  display: flex;
+  flex-direction: column;
+}
+
+.feed_button-create-post{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  margin:20px;
+}

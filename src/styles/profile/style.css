@@ -1,6 +1,6 @@
 body {
     height: 100vh;
-    background: url("img/main2.jpg") no-repeat center;
+    background: url("../../../vue/src/assets/img/profile/main2.png") no-repeat center;
     background-size: cover;
     display: flex;
     align-items: center;

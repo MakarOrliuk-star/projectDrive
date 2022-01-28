@@ -64,11 +64,6 @@ button{
     cursor: pointer;
 }
 
-.login_form{
-    height: 460px;
-    background: #eee;
-    border-radius: 60% / 10%;
-}
 
 .login_title_label{
     color: #00ad5f;
