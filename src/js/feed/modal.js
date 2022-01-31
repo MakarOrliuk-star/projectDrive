@@ -7,7 +7,7 @@ const newPost = document.querySelector('.create-new-post-bg')
 const feedMainPost = document.querySelector('.feed_posts')
 
 const inpFile = document.getElementById('inpFile')
-const image = document.querySelector('.post_image-profile')
+const image = document.querySelector('.post_image-profile.scss')
 
 
 const newCreatePost = (image, title, comment, id) => {

@@ -1,6 +1,7 @@
 <template lang="pug">
+div
+  ButtonFeed(@click="togglePostModalWindow")
   .feed_main
-    ButtonFeed(@click="togglePostModalWindow")
     PostFeed(:posts="posts")
     MenuFeed
     ModulWindow(v-if="showPostModalWindow" @close="togglePostModalWindow" @postCreated="createPost")
@@ -22,7 +23,8 @@ export default {
   data () {
     return {
       showPostModalWindow: false,
-      posts: []
+      posts: [],
+      text: ""
     }
   },
   methods: {

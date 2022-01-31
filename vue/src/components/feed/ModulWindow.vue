@@ -42,6 +42,7 @@ export default {
         title:'',
         img: '',
         comment:'',
+        getImg:''
       }
     }
   },
@@ -50,10 +51,16 @@ export default {
       this.$emit('close');
     },
     uploadImg (event) {
-      this.post.img = event?.target?.files?.[0];
+      let file = event?.target?.files?.[0];
+      var reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.post.getImg = reader.result;
+        console.log(this.post.getImg)
+      };
     },
     addPost () {
-      if (this.post.img && this.post.title && this.post.comment) {
+      if (this.post.getImg && this.post.title && this.post.comment) {
         this.$emit('postCreated', this.post);
       }
     }

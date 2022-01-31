@@ -47,6 +47,11 @@ const router = new VueRouter({
                     component: () => import('@/views/Feed.vue'),
                 }
             ]
+        },
+        {
+            path: "/facebook",
+            beforeEnter() {location.href = 'https://www.facebook.com/'},
+
         }
     ]
 });
