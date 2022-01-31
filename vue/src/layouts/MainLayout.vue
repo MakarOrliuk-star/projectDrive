@@ -20,13 +20,19 @@
             alt='',
           @click="$router.push({name: 'feed'})"
           )
+          img.feed_icon-profile(
+            src='../assets/img/feed/settings.png',
+            alt=""
+            @click="$router.push({name: 'editProfile'})"
+          )
           .feed_icon-profile.user-profile
     router-view
 </template>
 
 <style scoped>
-.feed{
+.feed {
   width: 100%;
+  min-height: 100vh;
   padding: 40px 0;
   justify-content: center;
   margin-top: 50px;
@@ -34,13 +40,13 @@
   background-size: cover;
   align-items: center;
   background: url("../assets/img/profile/main2.png");
-  height: 100%;
+  background-attachment: fixed;
   left: 0;
   opacity: 1;
   top: 0;
-  position: absolute;
 }
-.feed_header{
+
+.feed_header {
   position: fixed;
   top: 0;
   left: 0;
@@ -53,19 +59,21 @@
   padding: 5px 0;
   z-index: 100;
 }
-.feed_wrapper{
+
+.feed_wrapper {
   width: 70%;
   max-width: 1000px;
   height: 100%;
   display: flex;
   justify-content: space-between;
 }
-.feed_brand-image{
+
+.feed_brand-image {
   height: 100%;
   margin-top: 5px;
 }
 
-.feed_search-box{
+.feed_search-box {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -77,12 +85,12 @@
   text-align: center;
 }
 
-.feed_item-links{
+.feed_item-links {
   height: 22px;
   position: relative;
 }
 
-.feed_icon-profile{
+.feed_icon-profile {
   height: 100%;
   cursor: pointer;
   margin: 0 10px;

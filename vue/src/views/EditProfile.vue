@@ -1,31 +1,49 @@
-<template>
-  <div class="profile-edit">
-    <div class="profile-edit_area">
-      <div class="profile-edit_pic">
-        <img src="" alt="">
-      </div>
-      <a href="#" class="profile-edit_link">Изменить аватар</a>
-      <div class="profile-edit_title">Логин:</div>
-      <input type="text" class="profile-edit_input"/>
-
-      <div class="profile-edit_title">Фамилия:</div>
-      <input type="text" class="profile-edit_input"/>
-
-      <div class="profile-edit_title">Имя:</div>
-      <input type="text" class="profile-edit_input"/>
-
-      <div class="profile-edit_title">Отчество:</div>
-      <input type="text" class="profile-edit_input"/>
-
-      <div class="profile-edit_title">E-mail:</div>
-      <input type="text" class="profile-edit_input"/>
-
-      <div class="profile-edit_title">Телефон:</div>
-      <input type="text" class="profile-edit_input"/>
-
-      <div class="profile-edit_title">О себе:</div>
-      <textarea class="profile-edit_input"></textarea>
-      <button class="profile-edit_edit-save">Сохранить профиль</button>
-    </div>
-  </div>
+<template lang="pug">
+  .profile-edit
+    .profile-edit_area
+      .profile-edit_pic
+        img(:src='profile.img', alt='')
+      input#inpFile.create-new-post_form-control(type='file' @change="uploadImg")
+      .profile-edit_title Логин:
+      input.profile-edit_input(type='text')
+      .profile-edit_title Фамилия:
+      input.profile-edit_input(type='text')
+      .profile-edit_title Имя:
+      input.profile-edit_input(type='text')
+      .profile-edit_title Отчество:
+      input.profile-edit_input(type='text')
+      .profile-edit_title E-mail:
+      input.profile-edit_input(type='text')
+      .profile-edit_title Телефон:
+      input.profile-edit_input(type='text')
+      .profile-edit_title О себе:
+      textarea.profile-edit_input
+      button.profile-edit_edit-save Сохранить изменения
 </template>
+
+<script>
+export default {
+  data(){
+    return{
+      profile:{
+        img:''
+      }
+    }
+  },
+  methods:{
+    uploadImg(event){
+      let file = event?.target?.files?.[0];
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.profile.img = reader.result;
+      };
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "src/assets/scss/pages/profile/editprofile.scss";
+</style>

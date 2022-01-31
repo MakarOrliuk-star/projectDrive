@@ -2,13 +2,22 @@
 div
   ButtonFeed(@click="togglePostModalWindow")
   .feed_main
-    PostFeed(:posts="posts")
+    PostFeed(
+      :posts="posts"
+      @editButtonClicked="setEditingPost"
+      @deleteButtonClicked="deletePost"
+    )
     MenuFeed
-    ModulWindow(v-if="showPostModalWindow" @close="togglePostModalWindow" @postCreated="createPost")
+    ModulWindow(
+      v-if="showPostModalWindow"
+      @close="togglePostModalWindow"
+      @postCreated="createPost"
+      :editingPost="editingPost"
+    )
 </template>
 
 <script>
-import ButtonFeed from "@/components/feed/AllPostsFeed";
+import ButtonFeed from "@/components/feed/ButtonFeed";
 import MenuFeed from "@/components/feed/MenuFeed";
 import ModulWindow from "@/components/feed/ModulWindow";
 import PostFeed from "@/components/feed/PostFeed";
@@ -24,16 +33,43 @@ export default {
     return {
       showPostModalWindow: false,
       posts: [],
-      text: ""
+      text: "",
+      editingPostId: null
     }
   },
   methods: {
     togglePostModalWindow () {
+      if (this.showPostModalWindow) {
+        this.editingPostId = null;
+      }
       this.showPostModalWindow = !this.showPostModalWindow;
     },
     createPost (post) {
-      this.posts.push(post);
+      const updateIndex = this.posts.findIndex(post => post === post.id);
+      if(updateIndex){
+        console.log(updateIndex)
+      }
+        this.posts.push(post);
+        this.togglePostModalWindow();
+    },
+    deletePost (postId) {
+      const postIndex = this.posts.findIndex(post => postId === post.id);
+      this.posts.splice(postIndex, 1);
+    },
+    setEditingPost (postId) {
+      this.editingPostId = postId;
+
       this.togglePostModalWindow();
+    },
+    updatePost () {
+      // find post in posts with post.id
+      // change old post object to new post object
+      // prefer using splice
+    }
+  },
+  computed: {
+    editingPost () {
+      return this.editingPostId && this.posts.find(post => post.id === this.editingPostId);
     }
   }
 }

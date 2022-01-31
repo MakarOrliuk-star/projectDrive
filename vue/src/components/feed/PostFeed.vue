@@ -1,8 +1,8 @@
 <template lang="pug">
   div.feed_background
     .feed_post(
-      v-for="post in posts"
-      :key="post.title"
+      v-for="(post,index) in posts"
+      :id="index"
       )
       .feed_post-info
         .feed_post-info-user
@@ -23,12 +23,14 @@
         p.feed_post-content-likes 1,012 likes
         p.feed_post-content-description
           span username
-        | {{post.title}}
+        p.feed_post-content-description {{post.title}}
         p.feed_post-content-time 2 minutes ago
       .feed_post-comment
         img( src="", class="feed_icon-profile", alt="")
-        p.feed_post-comment-add {{post.comment}}
-        button.comment-btn post
+        p.feed_post-comment-add
+          span {{post.comment}}
+        .comment-btn(@click="deletePost(post.id)") Delete
+        .comment-btn(@click="editPost(post.id)") Edit
 </template>
 
 <script>
@@ -39,13 +41,25 @@ export default {
       default: () => []
     }
   },
-  data () {
+  data() {
     return {
-
+      editedPost: null,
     }
   },
   methods: {
-
+    scrollToTop(){
+      const top = document.querySelector('.feed_background')
+      top.scrollTo({
+        top: 1000,
+        behavior: "smooth"
+      });
+    },
+    editPost (postId) {
+      this.$emit('editButtonClicked', postId);
+    },
+    deletePost (postId) {
+      this.$emit('deleteButtonClicked', postId);
+    },
   }
 }
 </script>
@@ -54,5 +68,22 @@ export default {
 @import "src/assets/scss/pages/feed/post.scss";
 .feed_background{
   grid-row-start: 1;
+}
+
+.comment-btn {
+  color: #00ad5f;
+  border: 1px solid #00ad5f;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all .3s linear;
+}
+
+.comment-btn:hover {
+  color: #fff;
+  border: 1px solid #00ad5f;
+  background-color: #00ad5f;
 }
 </style>

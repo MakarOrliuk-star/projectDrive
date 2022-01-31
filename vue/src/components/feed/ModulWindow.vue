@@ -36,17 +36,27 @@
 
 <script>
 export default {
+  props: {
+    editingPost: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
       post: {
         title:'',
-        img: '',
         comment:'',
         getImg:''
       }
     }
   },
-  methods:{
+  mounted() {
+    if (this.editingPost) {
+      this.post = this.editingPost;
+    }
+  },
+  methods: {
     closeModule () {
       this.$emit('close');
     },
@@ -56,14 +66,13 @@ export default {
       reader.readAsDataURL(file)
       reader.onload = () => {
         this.post.getImg = reader.result;
-        console.log(this.post.getImg)
       };
     },
     addPost () {
       if (this.post.getImg && this.post.title && this.post.comment) {
-        this.$emit('postCreated', this.post);
+        this.$emit('postCreated', {...this.post, id: Math.floor(Math.random() * 100)});
       }
-    }
+    },
   }
 }
 </script>

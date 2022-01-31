@@ -7,6 +7,13 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
     mode: 'history',
+    scrollBehavior (to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { x: 0, y: 0 }
+        }
+    },
     routes: [
         {
             path: "/auth",
@@ -45,15 +52,15 @@ const router = new VueRouter({
                     path: "feed",
                     name: "feed",
                     component: () => import('@/views/Feed.vue'),
+                },
+                {
+                    path: "editprofile",
+                    name: "editProfile",
+                    component: () => import('@/views/EditProfile.vue'),
                 }
             ]
         },
-        {
-            path: "/facebook",
-            beforeEnter() {location.href = 'https://www.facebook.com/'},
-
-        }
-    ]
+    ],
 });
 
 export default router

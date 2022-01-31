@@ -14,7 +14,7 @@
       div
         p.feed_username-profile {{ follower.channel }}
         p.feed_profile-sub-text {{ follower.status }}
-      button.feed_profile-action-btn follow
+      button.feed_profile-action-btn Follow
 </template>
 
 <script>
