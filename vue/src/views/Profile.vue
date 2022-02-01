@@ -13,11 +13,20 @@
             alt=''
           )
         a.profile-card_icon(href='https://github.com/')
-          img.profile-card_icon.profile-card_fab-icon__border(src='../assets/img/card/git.png' alt='')
+          img.profile-card_icon.profile-card_fab-icon__border(
+            src='../assets/img/card/git.png'
+            alt=''
+          )
         a.profile-card_icon(href='https://www.instagram.com/')
-          img.profile-card_icon.profile-card_fab-icon__border(src='../assets/img/card/inst.png' alt='')
+          img.profile-card_icon.profile-card_fab-icon__border(
+            src='../assets/img/card/inst.png'
+            alt=''
+          )
         a.profile-card_icon(href='https://web.telegram.org/')
-          img.profile-card_icon.profile-card_fab-icon__border(src='../assets/img/card/tg.png' alt='')
+          img.profile-card_icon.profile-card_fab-icon__border(
+            src='../assets/img/card/tg.png'
+            alt=''
+          )
       button(@click="togglePopup") Contact me
     .profile-card_footer
       .profile-card_numbers-block
@@ -47,7 +56,7 @@ export default {
     PopupProfile
   },
   methods:{
-    togglePopup: function() {
+    togglePopup() {
       this.isShow = !this.isShow;
     },
   }

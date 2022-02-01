@@ -1,49 +1,44 @@
 <template lang="pug">
   .profile-edit
-    .profile-edit_area
-      .profile-edit_pic
-        img(:src='profile.img', alt='')
-      input#inpFile.create-new-post_form-control(type='file' @change="uploadImg")
-      .profile-edit_title Логин:
-      input.profile-edit_input(type='text')
-      .profile-edit_title Фамилия:
-      input.profile-edit_input(type='text')
-      .profile-edit_title Имя:
-      input.profile-edit_input(type='text')
-      .profile-edit_title Отчество:
-      input.profile-edit_input(type='text')
-      .profile-edit_title E-mail:
-      input.profile-edit_input(type='text')
-      .profile-edit_title Телефон:
-      input.profile-edit_input(type='text')
-      .profile-edit_title О себе:
-      textarea.profile-edit_input
-      button.profile-edit_edit-save Сохранить изменения
+    Edit(
+    @profileInfo="getPreviewInfo"
+    )
+    ButtonProfile(@click="toggleInfoWindow")
+    Preview(
+      v-if="showInfoWindow"
+      :previewInfo="previewInfo"
+      )
 </template>
 
 <script>
+
+import Edit from "@/components/profile/edit/Edit";
+import Preview from "@/components/profile/edit/Preview";
+import ButtonProfile from "@/components/profile/button/ButtonProfile";
+
 export default {
+  components:{
+    Edit,
+    Preview,
+    ButtonProfile
+  },
   data(){
-    return{
-      profile:{
-        img:''
-      }
+    return {
+      showInfoWindow: false,
+      previewInfo:[]
     }
   },
   methods:{
-    uploadImg(event){
-      let file = event?.target?.files?.[0];
-      let reader = new FileReader();
-
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        this.profile.img = reader.result;
-      };
+    toggleInfoWindow(){
+      this.showInfoWindow = !this.showInfoWindow;
+    },
+    getPreviewInfo(infoProfiles){
+      this.previewInfo.push(infoProfiles);
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/scss/pages/profile/editprofile.scss";
+
 </style>

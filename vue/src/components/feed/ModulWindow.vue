@@ -47,13 +47,14 @@ export default {
       post: {
         title:'',
         comment:'',
-        getImg:''
+        getImg:'',
+        id: ''
       }
     }
   },
   mounted() {
     if (this.editingPost) {
-      this.post = this.editingPost;
+      this.post = Object.assign({}, this.editingPost);
     }
   },
   methods: {
@@ -62,7 +63,7 @@ export default {
     },
     uploadImg (event) {
       let file = event?.target?.files?.[0];
-      var reader = new FileReader()
+      let reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onload = () => {
         this.post.getImg = reader.result;
@@ -70,7 +71,13 @@ export default {
     },
     addPost () {
       if (this.post.getImg && this.post.title && this.post.comment) {
-        this.$emit('postCreated', {...this.post, id: Math.floor(Math.random() * 100)});
+        const eventName = this.editingPost ? 'postUpdated' : 'postCreated';
+
+        if (!this.editingPost) {
+          this.post.id = (new Date()).toTimeString() + Math.floor(Math.random() * 2000);
+        }
+
+        this.$emit(eventName, this.post);
       }
     },
   }

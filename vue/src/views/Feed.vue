@@ -13,6 +13,7 @@ div
       @close="togglePostModalWindow"
       @postCreated="createPost"
       :editingPost="editingPost"
+      @postUpdated="updatePost"
     )
 </template>
 
@@ -33,7 +34,6 @@ export default {
     return {
       showPostModalWindow: false,
       posts: [],
-      text: "",
       editingPostId: null
     }
   },
@@ -44,13 +44,9 @@ export default {
       }
       this.showPostModalWindow = !this.showPostModalWindow;
     },
-    createPost (post) {
-      const updateIndex = this.posts.findIndex(post => post === post.id);
-      if(updateIndex){
-        console.log(updateIndex)
-      }
-        this.posts.push(post);
-        this.togglePostModalWindow();
+    createPost(post) {
+      this.posts.push(post);
+      this.togglePostModalWindow();
     },
     deletePost (postId) {
       const postIndex = this.posts.findIndex(post => postId === post.id);
@@ -58,13 +54,12 @@ export default {
     },
     setEditingPost (postId) {
       this.editingPostId = postId;
-
       this.togglePostModalWindow();
     },
-    updatePost () {
-      // find post in posts with post.id
-      // change old post object to new post object
-      // prefer using splice
+    updatePost (post) {
+      const updateIndex = this.posts.findIndex(innerPost => innerPost.id === post.id);
+      this.posts.splice(updateIndex, post);
+      this.togglePostModalWindow();
     }
   },
   computed: {

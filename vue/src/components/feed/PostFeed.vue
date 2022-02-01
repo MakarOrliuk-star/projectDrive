@@ -47,15 +47,15 @@ export default {
     }
   },
   methods: {
-    scrollToTop(){
-      const top = document.querySelector('.feed_background')
-      top.scrollTo({
-        top: 1000,
+    scrollToTop () {
+      window.scrollTo({
+        top: 1,
         behavior: "smooth"
       });
     },
     editPost (postId) {
       this.$emit('editButtonClicked', postId);
+      this.scrollToTop();
     },
     deletePost (postId) {
       this.$emit('deleteButtonClicked', postId);

@@ -2,8 +2,11 @@
   .feed
     nav.feed_header
       .feed_wrapper
-        img.feed_brand-image(src='../assets/img/feed/logo.png', alt='')
-        input.feed_search-box(type='text', placeholder='search')
+        img.feed_brand-image(
+          src='../assets/img/feed/logo.png',
+          alt='',
+          @click="$router.push({name: 'feed' })"
+        )
         .feed_item-links
           img.feed_icon-profile(
             src='../assets/img/feed/home.png',
@@ -13,12 +16,12 @@
           img.feed_icon-profile(
             src='../assets/img/feed/exp.png',
             alt='',
-          @click="$router.push({name: 'login'})"
+            @click="$router.push({name: 'login'})"
           )
           img.feed_icon-profile(
             src='../assets/img/feed/like.png',
             alt='',
-          @click="$router.push({name: 'feed'})"
+            @click="$router.push({name: 'feed'})"
           )
           img.feed_icon-profile(
             src='../assets/img/feed/settings.png',
