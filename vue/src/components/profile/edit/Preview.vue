@@ -1,12 +1,9 @@
 <template lang="pug">
 div
-  .profile-card_header(
-    v-for="(info,index) in previewInfo"
-    :key="index"
-    )
+  .profile-card_header
     .profile-card_pic
-      img(:src="info.img" alt='')
-    .profile-card_name {{info.name}} {{info.surname}}
+      img(:src="previewInfo.img" alt='')
+    .profile-card_name {{previewInfo.name}} {{previewInfo.surname}}
     .profile-card_desc Web Developer
     .profile-card_links
       a.profile-card_icon(href='https://www.facebook.com/')
@@ -35,8 +32,8 @@ div
 export default {
   props:{
     previewInfo: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     }
   },
 }

@@ -71,17 +71,7 @@ export default {
       if(this.infoProfiles.login && this.infoProfiles.phone && this.infoProfiles.mail){
         this.$emit('profileInfo', this.infoProfiles)
       }
-      this.fieldZeroing()
     },
-    fieldZeroing(){
-      this.infoProfiles.login = ''
-      this.infoProfiles.surname = ''
-      this.infoProfiles.name = ''
-      this.infoProfiles.middleName = ''
-      this.infoProfiles.mail = ''
-      this.infoProfiles.phone = ''
-      this.infoProfiles.aboutYou = ''
-    }
   }
 }
 </script>

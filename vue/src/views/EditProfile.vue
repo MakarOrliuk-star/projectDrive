@@ -7,7 +7,7 @@
     Preview(
       v-if="showInfoWindow"
       :previewInfo="previewInfo"
-      )
+    )
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
   data(){
     return {
       showInfoWindow: false,
-      previewInfo:[]
+      previewInfo: null
     }
   },
   methods:{
@@ -33,7 +33,8 @@ export default {
       this.showInfoWindow = !this.showInfoWindow;
     },
     getPreviewInfo(infoProfiles){
-      this.previewInfo.push(infoProfiles);
+      this.previewInfo = infoProfiles;
+      this.toggleInfoWindow();
     }
   },
 }
