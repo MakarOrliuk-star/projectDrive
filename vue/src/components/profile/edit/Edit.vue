@@ -95,4 +95,7 @@ export default {
   background-color: #00ad5f;
 }
 
+textarea{
+  resize: none;
+}
 </style>

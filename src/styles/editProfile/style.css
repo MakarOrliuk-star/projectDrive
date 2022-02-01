@@ -37,6 +37,7 @@ body {
     width:400px;
     float:left;
     box-sizing:border-box;
+    margin: 0 440px;
 }
 
 .profile-edit {

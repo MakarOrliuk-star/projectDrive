@@ -13,7 +13,6 @@ div
       @close="togglePostModalWindow"
       @postCreated="createPost"
       :editingPost="editingPost"
-      @postUpdated="updatePost"
     )
 </template>
 
@@ -34,6 +33,7 @@ export default {
     return {
       showPostModalWindow: false,
       posts: [],
+      text: "",
       editingPostId: null
     }
   },

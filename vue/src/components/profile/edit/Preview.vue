@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div.profile_position
   .profile-card_header
     .profile-card_pic
       img(:src="previewInfo.img" alt='')
@@ -43,8 +43,16 @@ export default {
 <style lang="scss" scoped>
 @import "src/assets/scss/pages/profile/profile.scss";
 .profile-card_header{
-  position: absolute;
+  position: relative;
+  width: 315px;
+  min-height: 355px;
+  padding: 20px;
   left: 1000px;
+}
+.profile_position{
+  position: absolute;
+  top: 100px;
+  margin-left: 70px;
 }
 
 </style>
