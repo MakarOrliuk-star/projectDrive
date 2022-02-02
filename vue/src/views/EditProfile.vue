@@ -16,6 +16,8 @@ import Edit from "@/components/profile/edit/Edit";
 import Preview from "@/components/profile/edit/Preview";
 import ButtonProfile from "@/components/profile/button/ButtonProfile";
 
+import {mapActions} from 'vuex'
+
 export default {
   components:{
     Edit,
@@ -29,11 +31,15 @@ export default {
     }
   },
   methods:{
+    ...mapActions([
+      'setImage'
+    ]),
     toggleInfoWindow(){
       this.showInfoWindow = !this.showInfoWindow;
     },
     getPreviewInfo(infoProfiles){
       this.previewInfo = infoProfiles;
+      this.setImage(infoProfiles);
       this.toggleInfoWindow();
     }
   },

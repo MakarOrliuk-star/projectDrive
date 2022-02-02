@@ -43,7 +43,13 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
+
 export default {
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data(){
     return{
       infoProfiles:{
@@ -72,6 +78,12 @@ export default {
         this.$emit('profileInfo', this.infoProfiles)
       }
     },
+    validations: {
+      infoProfiles: {
+        name: { required  },
+        mail: { required, email }
+      }
+    },
   }
 }
 </script>
@@ -97,5 +109,10 @@ export default {
 
 textarea{
   resize: none;
+}
+
+::placeholder {
+  color: #007fb9;
+  font-size: 1em;
 }
 </style>
