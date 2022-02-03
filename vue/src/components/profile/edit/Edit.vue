@@ -64,6 +64,14 @@ export default {
       },
     }
   },
+
+  validations: {
+    infoProfiles: {
+      name: { required  },
+      mail: { required, email }
+    }
+  },
+
   methods:{
     uploadImg(event){
       let file = event?.target?.files?.[0];
@@ -76,12 +84,6 @@ export default {
     getInfoView( ){
       if(this.infoProfiles.login && this.infoProfiles.phone && this.infoProfiles.mail){
         this.$emit('profileInfo', this.infoProfiles)
-      }
-    },
-    validations: {
-      infoProfiles: {
-        name: { required  },
-        mail: { required, email }
       }
     },
   }

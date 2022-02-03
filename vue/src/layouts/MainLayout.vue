@@ -28,9 +28,22 @@
             alt=""
             @click="$router.push({name: 'editProfile'})"
           )
+          img.feed_icon-profile.feed_icon-profile__border(
+            :src='getImage.img',
+            alt='',
+          )
           .feed_icon-profile.user-profile
     router-view
 </template>
+
+<script>
+import {mapGetters} from 'vuex'
+export default {
+  computed:{
+    ...mapGetters(['getImage']),
+  }
+}
+</script>
 
 <style scoped>
 .feed {
@@ -42,8 +55,7 @@
 
   background-size: cover;
   align-items: center;
-  background: url("../assets/img/profile/main2.png");
-  background-attachment: fixed;
+  background: url("../assets/img/profile/main2.png") fixed;
   left: 0;
   opacity: 1;
   top: 0;
@@ -98,6 +110,10 @@
   cursor: pointer;
   margin: 0 10px;
   display: inline-block;
+}
+
+.feed_icon-profile__border{
+  border-radius: 10px;
 }
 
 </style>

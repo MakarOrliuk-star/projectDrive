@@ -25,8 +25,7 @@ export default {
     ]),
     currentForm (form) {
       this.form = form;
-      this.setUser(form)
-      return this.form
+      this.setUser(form);
     }
   }
 }

@@ -13,6 +13,7 @@ div
       @close="togglePostModalWindow"
       @postCreated="createPost"
       :editingPost="editingPost"
+      @postUpdated="updatePost"
     )
 </template>
 

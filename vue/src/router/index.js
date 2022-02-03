@@ -40,13 +40,6 @@ const router = new VueRouter({
                     path: "profile",
                     name: "profile",
                     component: () => import('@/views/Profile.vue'),
-                    children:[
-                        {
-                            path:"/edit",
-                            name: "edit",
-                            component: () => import('@/views/EditProfile.vue'),
-                        }
-                    ]
                 },
                 {
                     path: "feed",
