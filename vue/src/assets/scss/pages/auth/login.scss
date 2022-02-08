@@ -1,0 +1,78 @@
+@import "src/assets/scss/variables/main.scss";
+
+.login_wrapper {
+  overflow: hidden;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #000;
+  width: 20%;
+  height: 50%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.login_link-container {
+  margin: 15%;
+}
+
+.login_title_label {
+  color: #00ad5f;
+  font-size: 2.3em;
+  justify-content: center;
+  display: flex;
+  margin: 60px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button {
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: #00ad5f;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .2s ease-in;
+  cursor: pointer;
+}
+
+@media (max-width: $xs) {
+  .login_wrapper {
+    width: 300px;
+  }
+}
+
+@media (max-width: $xm) {
+  .login_wrapper {
+    width: 300px;
+  }
+}
+
+@media (max-width: $md) {
+  .login_wrapper {
+    width: 300px;
+  }
+}
+
+@media (max-width: $lg) {
+  .login_wrapper {
+    width: 300px;
+  }
+}
+
+@media (max-width: $xlg) {
+  .login_wrapper {
+    width: 300px;
+  }
+}

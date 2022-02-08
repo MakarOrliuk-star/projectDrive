@@ -7,7 +7,7 @@ const newPost = document.querySelector('.create-new-post-bg')
 const feedMainPost = document.querySelector('.feed_posts')
 
 const inpFile = document.getElementById('inpFile')
-const image = document.querySelector('.post_image-profile')
+const image = document.querySelector('.post_image-profile.scss')
 
 
 const newCreatePost = (image, title, comment, id) => {
@@ -17,17 +17,17 @@ const newCreatePost = (image, title, comment, id) => {
     post.insertAdjacentHTML('afterbegin', `
         <div class="feed_post-info">         
                 <div class="feed_post-info-user">
-                        <div class="feed_profile-pic"><img src="../../styles/feed/img/cover 1.png" alt=""></div>
+                        <div class="feed_profile-pic"><img src="../../../vue/src/assets/img/feed/cover%201.png" alt=""></div>
                         <p class="feed_username-post">User 1</p>
                     </div>
                     <img src="" class="feed_options" alt="">
                 </div>
-                <img src="${image || ''}" class="post_image-profile" alt="">
+                <img src="${image || ''}" class="post-image" alt="">
                 <div class="feed_post-content">
                     <div class="feed_post-content-reaction">
-                        <img src="../../styles/feed/img/like.PNG" class="feed_icon-profile" alt="">
+                        <img src="../../../vue/src/assets/img/feed/like.png" class="feed_icon-profile" alt="">
                         <img src="" class="feed_icon-profile" alt="">
-                        <img src="../../styles/feed/img/send.PNG" class="feed_icon-profile" alt="">
+                        <img src="../../../vue/src/assets/img/feed/send.PNG" class="feed_icon-profile" alt="">
                         <img src="" class="save feed_icon-profile" alt="">
                     </div>
                     <p class="feed_post-content-likes">1,012 likes</p>

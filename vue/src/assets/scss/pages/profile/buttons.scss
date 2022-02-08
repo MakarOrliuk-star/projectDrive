@@ -1,0 +1,16 @@
+.profile-edit_edit-save{
+  color: #00ad5f;
+  border: 1px solid #00ad5f;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all .3s linear;
+}
+
+.profile-edit_edit-save:hover{
+  color: #fff;
+  border: 1px solid #00ad5f;
+  background-color: #00ad5f;
+}

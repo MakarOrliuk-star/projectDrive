@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "materialize-css": "^1.0.0-rc.2",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "vue-router": "^3.5.3"
+  },
+  "devDependencies": {
+    "fibers": "^5.0.1",
+    "node-sass": "^7.0.1",
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0",
+    "webpack": "^5.67.0"
+  }
+}
