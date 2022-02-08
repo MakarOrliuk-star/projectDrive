@@ -27,3 +27,11 @@ Route::group([
     Route::post('/refresh', 'AuthController@refresh');
     Route::post('/me', 'AuthController@me');
 });
+
+Route::resource('posts', 'PostController');
+
+Route::get('comments/post/{id}','CommentController@getCommentsByPostId');
+Route::resource('comments', 'CommentController');
+
+Route::get('post/{id}/isliked', 'PostController@isLiked');
+Route::post('post/like', 'PostController@like');
