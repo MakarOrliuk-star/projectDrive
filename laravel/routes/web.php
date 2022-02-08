@@ -17,5 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/mail','FeedController@create');
+Route::get('/mail','UserController@index');
