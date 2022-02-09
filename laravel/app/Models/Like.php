@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Like extends Model
 {
     protected $fillable = [
-        'comment',
+      'post_id',
+      'user_id',
     ];
 }

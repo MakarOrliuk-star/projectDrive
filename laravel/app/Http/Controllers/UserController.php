@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,4 +12,6 @@ class UserController extends Controller
             dump($user->name);
         }
     }
+
+
 }
