@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resource('users', 'UserController');
+
+Route::resource('posts', 'PostController');
+
+Route::resource('comments', 'CommentController');
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -28,10 +34,8 @@ Route::group([
     Route::post('/me', 'AuthController@me');
 });
 
-Route::resource('posts', 'PostController');
+Route::group(['prefix' => 'post'], function (){
+    Route::get('/{id}/isliked', 'PostController@isLiked');
+    Route::post('/like', 'PostController@like');
+});
 
-Route::get('comments/post/{id}','CommentController@getCommentsByPostId');
-Route::resource('comments', 'CommentController');
-
-Route::get('post/{id}/isliked', 'PostController@isLiked');
-Route::post('post/like', 'PostController@like');

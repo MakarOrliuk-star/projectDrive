@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -13,38 +15,53 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return $posts;
+
+        return PostResource::collection($posts);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
+        $validate = $request->validated();
+
+        if(! $validate){
+            return response($validate,400);
+        }
+
         $post = new Post;
         $post->title = $request->input('title');
         $post->image = $request->input('image');
-        $post->user_id = $request->user('api')->id;
         $post->save();
-        return $post;
+
+        return new PostResource($post);
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
-        return $post;
+        return new PostResource($post);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
+        $validate = $request->validated();
+
+        if(! $validate){
+            return response($validate,400);
+        }
+
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->image = $request->input('image');
         $post->save();
-        return $post;
+
+        return new PostResource($post);
     }
 
     public function destroy($id)
     {
         $post = Post::find($id);
         $post-> delete();
+
+        return response()->json(['Post Has Been Deleted']);
     }
 
     public function isLiked($id)

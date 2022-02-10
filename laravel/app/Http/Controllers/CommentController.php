@@ -2,37 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
     public function index(){
-        //
+        $comments = Comment::all();
+        return CommentResource::collection($comments);
     }
 
-    public function store(Request $request){
+    public function store(CommentRequest $request){
+
+        $validate = $request->validated();
+
+        if(!$validate){
+            return response($validate,400);
+        }
+
         $comment = new Comment;
-        $comment->body = $request->input('body');
-        $comment->post_id = $request->input('post_id');
-        $comment->user_id = $request->input('user_id');
+        $comment->content = $request->input('content');
         $comment->save();
+
+        return new CommentResource($comment);
+    }
+
+    public function show(Comment $comment)
+    {
         return $comment;
     }
 
-    public function show($id)
+    public function update(CommentRequest $request, $id)
     {
-        //
-    }
+        $validate = $request->validated();
 
-    public function getCommentsByPostId($id){
-        $comments = Comment::where('post_id',$id)->orderBy('id', 'desc')->get();
-        return $comments;
-    }
+        if(!$validate){
+            return response($validate,400);
+        }
 
-    public function update(Request $request, $id)
-    {
-        //
+        $comment = Comment::find($id);
+        $comment->content = $request->input('content');
+        $comment->save();
+
+        return new CommentResource($comment);
     }
 
     public function destroy($id)
