@@ -25,8 +25,8 @@ const router = new VueRouter({
                     component: () => import('@/views/Login.vue')
                 },
                 {
-                    path: "reset",
-                    name:'reset',
+                    path: "register",
+                    name:'register',
                     component: () => import('@/views/Registration.vue')
                 },
             ]

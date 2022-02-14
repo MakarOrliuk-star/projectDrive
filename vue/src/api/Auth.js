@@ -6,15 +6,15 @@ class AuthApi extends Api {
         return this.axios.post('/auth/login', data)
     }
 
-    loginMe (data) {
+    me (data) {
         return this.axios.post(`/auth/me`, data)
     }
 
-    loginRefresh (data) {
-        return this.axios.post(`/auth/refresh`, data)
+    register (data) {
+        return this.axios.post('/auth/register', data)
     }
 
-    loginLogout(data) {
+    logout(data) {
         return this.axios.post(`/auth/logout`, data)
     }
 }
