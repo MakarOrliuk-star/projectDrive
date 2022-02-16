@@ -8,6 +8,9 @@ use App\Models\Like;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class PostController extends Controller
 {
@@ -27,9 +30,15 @@ class PostController extends Controller
             return response($validate,400);
         }
 
-        $post = new Post;
+        $post = new Post();
         $post->title = $request->input('title');
-        $post->image = $request->input('image');
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save( storage_path('/uploads/' . $filename ));
+            $post->image = $filename;
+            $post->save();
+        }
         $post->save();
 
         return new PostResource($post);

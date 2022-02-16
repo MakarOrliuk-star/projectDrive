@@ -2,16 +2,16 @@ import Api from './Api'
 
 class AuthApi extends Api {
 
-    login (data) {
-        return this.axios.post('/auth/login', data)
-    }
-
     me (data) {
-        return this.axios.post(`/auth/me`, data)
+        return this.axios.post('/auth/me', data);
     }
 
     register (data) {
         return this.axios.post('/auth/register', data)
+    }
+
+    login (data) {
+        return this.axios.post('/auth/login', data)
     }
 
     logout(data) {

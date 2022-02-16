@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import PostApi from "@/api/Post";
+
 export default {
   props: {
     editingPost: {
@@ -70,17 +72,25 @@ export default {
       };
     },
     addPost () {
-      if (this.post.getImg && this.post.title && this.post.comment) {
-        const eventName = this.editingPost ? 'postUpdated' : 'postCreated';
+         if (this.post.getImg && this.post.title && this.post.comment) {
+           const eventName = this.editingPost ? 'postUpdated' : 'postCreated'
 
-        if (!this.editingPost) {
-          this.post.id = (new Date()).toTimeString() + Math.floor(Math.random() * 2000);
-        }
-
-        this.$emit(eventName, this.post);
-      }
-    },
-  }
+           this.$emit(eventName, this.post);
+            let form ={
+              title: this.post.title,
+              image: this.post.getImg,
+            }
+            PostApi.store(form)
+            .then((resp) => {
+              console.log(resp)
+              this.$router.push({ name: 'feed' })
+            })
+            .catch(error =>{
+              console.log(error)
+            })
+         }
+       },
+    }
 }
 </script>
 

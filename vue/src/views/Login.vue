@@ -8,7 +8,6 @@
 
 <script>
 import FormLogin from "@/components/login/input/FormLogin";
-import {mapActions} from 'vuex'
 export default {
   components:{
     FormLogin
@@ -20,12 +19,8 @@ export default {
     }
   },
   methods:{
-    ...mapActions([
-       'setUser'
-    ]),
     currentForm (form) {
       this.form = form;
-      this.setUser(form);
     }
   }
 }

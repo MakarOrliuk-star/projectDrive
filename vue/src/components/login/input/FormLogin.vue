@@ -15,13 +15,11 @@
 </template>
 
 <script>
-import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
+import AuthApi from '@/api/Auth'
+import Cookies from 'js-cookie'
 
 export default {
-  setup () {
-    return { v$: useVuelidate() }
-  },
   data(){
     return{
       form: {
@@ -42,8 +40,15 @@ export default {
     signIn(){
       if(this.form.email && this.form.password){
         this.$emit('getForm', this.form)
-        this.$router.push({name: 'feed'})
       }
+      AuthApi.login(this.form)
+          .then((resp) => {
+            Cookies.set('userToken', resp.data['access_token'])
+            this.$router.push({name: 'feed'})
+          })
+          .catch(error =>{
+            console.log(error)
+          })
       this.form.email = ''
       this.form.password = ''
     },

@@ -5,8 +5,31 @@
 </template>
 
 <script>
-export default {
+import {mapActions, mapGetters} from 'vuex'
+import AuthApi from "@/api/Auth";
 
+const AUTH_ROUTES_NAME = [
+    'login', 'register'
+]
+
+export default {
+  computed: {
+    ...mapGetters(['getUser']),
+  },
+  methods: {
+    ...mapActions([
+      'setUser'
+    ]),
+  },
+  mounted() {
+    if (!this.getUser && !AUTH_ROUTES_NAME.includes(this.$route.name)) {
+      AuthApi.me()
+          .then(response => {
+            this.setUser(response.data)
+          })
+          .catch(console.error)
+    }
+  }
 }
 </script>
 

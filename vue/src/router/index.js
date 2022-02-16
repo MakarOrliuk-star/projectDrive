@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import AuthLayout from "@/layouts/AuthLayout";
+import MainLayout from "@/layouts/MainLayout";
 
 Vue.config.productionTip = false
 
@@ -17,7 +19,7 @@ const router = new VueRouter({
     routes: [
         {
             path: "/auth",
-            component: () => import('@/layouts/AuthLayout.vue'),
+            component: AuthLayout,
             children: [
                 {
                     path: "login",
@@ -34,7 +36,7 @@ const router = new VueRouter({
         {
             path: "/",
             name:'home',
-            component: () => import('@/layouts/MainLayout.vue'),
+            component: MainLayout,
             children:[
                 {
                     path: "profile",

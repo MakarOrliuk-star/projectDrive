@@ -8,7 +8,8 @@ class Post extends Model
 {
     protected $fillable = [
         'title',
-        'image'
+        'image',
+        'user_id'
     ];
 
     protected static function boot()

@@ -3,7 +3,13 @@
     router-view
 </template>
 
-<style scoped>
+<script>
+export default {
+
+}
+</script>
+
+<style lang="scss" scoped>
  .login{
    overflow: hidden;
    background: url("../assets/img/main2.jpg");

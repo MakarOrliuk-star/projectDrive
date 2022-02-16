@@ -1,5 +1,5 @@
 <template lang="pug">
-  .feed_profile-menu {{getUser.email}}
+  .feed_profile-menu
     .feed_profile-card
       .feed_profile-pic
         img(src='', alt='')
@@ -18,8 +18,6 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-
 export default {
   data () {
     return {
@@ -38,9 +36,7 @@ export default {
       }
     }, 5000);
   },
-  computed: {
-    ...mapGetters(['getUser']),
-  },
+
 }
 
 </script>

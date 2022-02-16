@@ -18,17 +18,14 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::resource('users', 'UserController');
 
-Route::resource('posts', 'PostController');
-
-Route::resource('comments', 'CommentController');
 
 Route::group([
     'prefix' => 'auth'
 ], function() {
     Route::post('register', 'RegisterController@register');
     Route::post('login', 'AuthController@login');
+    Route::post('refresh', 'AuthController@refresh');
 });
 
 Route::group([
@@ -36,17 +33,10 @@ Route::group([
     'middleware' => ['jwt.auth', 'jwt.refresh']
 ], function() {
     Route::post('me', 'AuthController@me');
+    Route::resource('users', 'UserController');
+    Route::resource('posts', 'PostController');
+    Route::resource('comments', 'CommentController');
 });
-
-//Route::group([
-//    'middleware' => 'api',
-//    'prefix' => 'auth'
-//], function ($router) {
-//
-//    Route::post('logout', 'AuthController@logout');
-//    Route::post('refresh', 'AuthController@refresh');
-//    Route::post('me', 'AuthController@me');
-//});
 
 Route::group(['prefix' => 'posts'], function (){
     Route::get('{id}/isliked', 'PostController@isLiked');

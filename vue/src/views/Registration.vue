@@ -25,20 +25,22 @@ export default {
   methods:{
     SignUp(){
       let form = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
+        name: this.form.name,
+        email: this.form.email,
+        password: this.form.password,
       }
+      console.log(form)
       AuthApi.register(form)
       .then(() => {
-        this.name = ''
-        this.email = ''
-        this.password = ''
-        console.log(this.name)
+        this.form.name = ''
+        this.form.email = ''
+        this.form.password = ''
+
       })
       .catch(error =>{
         console.log(error)
       })
+      this.$router.push({name: 'login'})
     }
   },
 }
