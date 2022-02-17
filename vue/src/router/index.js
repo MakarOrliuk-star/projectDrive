@@ -2,6 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";
+import Login from "@/views/Login";
+import Feed from "@/views/Feed";
+import Registration from "@/views/Registration";
+import Profile from "@/views/Profile";
+import EditProfile from "@/views/EditProfile";
 
 Vue.config.productionTip = false
 
@@ -20,16 +25,19 @@ const router = new VueRouter({
         {
             path: "/auth",
             component: AuthLayout,
+            props:true,
             children: [
                 {
                     path: "login",
                     name:'login',
-                    component: () => import('@/views/Login.vue')
+                    component: Login,
+                    props: true
                 },
                 {
                     path: "register",
                     name:'register',
-                    component: () => import('@/views/Registration.vue')
+                    component: Registration,
+                    props: true
                 },
             ]
         },
@@ -37,21 +45,25 @@ const router = new VueRouter({
             path: "/",
             name:'home',
             component: MainLayout,
+            props:true,
             children:[
                 {
                     path: "profile",
                     name: "profile",
-                    component: () => import('@/views/Profile.vue'),
+                    component: Profile,
+                    props: true
                 },
                 {
                     path: "feed",
                     name: "feed",
-                    component: () => import('@/views/Feed.vue'),
+                    component: Feed,
+                    props: true
                 },
                 {
                     path: "editprofile",
                     name: "editProfile",
-                    component: () => import('@/views/EditProfile.vue'),
+                    component: EditProfile,
+                    props: true
                 }
             ]
         },

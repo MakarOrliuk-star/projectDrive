@@ -32,15 +32,12 @@ export default {
       console.log(form)
       AuthApi.register(form)
       .then(() => {
-        this.form.name = ''
-        this.form.email = ''
-        this.form.password = ''
-
+        this.$router.push({name: 'login'})
       })
       .catch(error =>{
         console.log(error)
       })
-      this.$router.push({name: 'login'})
+
     }
   },
 }

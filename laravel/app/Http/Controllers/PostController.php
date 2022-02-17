@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -24,23 +25,22 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        $validate = $request->validated();
-
-        if(! $validate){
-            return response($validate,400);
-        }
-
         $post = new Post();
-        $post->title = $request->input('title');
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(300, 300)->save( storage_path('/uploads/' . $filename ));
-            $post->image = $filename;
-            $post->save();
-        }
-        $post->save();
 
+        if($request->image) {
+            $base64File = $request->image;
+
+            $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
+            $extension = explode('/', mime_content_type($base64File))[1];
+            $fileName = "/publications/" . time() . '.' . $extension;
+            Storage::disk('public')->put($fileName , $fileData);
+
+            $post->image = $fileName;
+        }
+
+        $post->title = $request->input('title');
+        $post->user_id = Auth::user()->id;
+        $post->save();
         return new PostResource($post);
     }
 

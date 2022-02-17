@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
-
 Route::group([
     'prefix' => 'auth'
 ], function() {
@@ -28,14 +27,15 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
 });
 
+Route::group(['prefix' => 'posts'], function() {
+    Route::resource('/', 'PostController');
+});
+
 Route::group([
     'prefix' => 'auth',
     'middleware' => ['jwt.auth', 'jwt.refresh']
 ], function() {
     Route::post('me', 'AuthController@me');
-    Route::resource('users', 'UserController');
-    Route::resource('posts', 'PostController');
-    Route::resource('comments', 'CommentController');
 });
 
 Route::group(['prefix' => 'posts'], function (){

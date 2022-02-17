@@ -25,7 +25,7 @@ export default {
     if (!this.getUser && !AUTH_ROUTES_NAME.includes(this.$route.name)) {
       AuthApi.me()
           .then(response => {
-            this.setUser(response.data)
+            this.setUser(response.data.data)
           })
           .catch(console.error)
     }
