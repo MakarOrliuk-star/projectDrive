@@ -40,6 +40,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->user_id = Auth::user()->id;
+        $post->created_at = $request->input('created_at');
         $post->save();
         return new PostResource($post);
     }
@@ -51,11 +52,6 @@ class PostController extends Controller
 
     public function update(PostRequest $request, $id)
     {
-        $validate = $request->validated();
-
-        if(! $validate){
-            return response($validate,400);
-        }
 
         $post = Post::find($id);
         $post->title = $request->input('title');

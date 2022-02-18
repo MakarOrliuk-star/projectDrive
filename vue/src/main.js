@@ -7,7 +7,9 @@ import 'materialize-css/dist/css/materialize.min.css'
 
 Vue.use(VueCompositionAPI);
 
-Vue.config.productionTip = false
+Vue.filter('apiFile', value => '/storage' + value)
+
+//Vue.config.productionTip = false
 
 new Vue({
   store,

@@ -6,6 +6,10 @@ class PostApi extends Api {
         return this.axios.post('/posts', data)
     }
 
+    index(){
+        return this.axios.get('/posts')
+    }
+
 }
 
 export default new PostApi()

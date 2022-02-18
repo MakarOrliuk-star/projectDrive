@@ -31,6 +31,10 @@ Route::group(['prefix' => 'posts'], function() {
     Route::resource('/', 'PostController');
 });
 
+Route::group(['prefix' => 'comments'], function() {
+    Route::resource('/', 'CommmentController');
+});
+
 Route::group([
     'prefix' => 'auth',
     'middleware' => ['jwt.auth', 'jwt.refresh']

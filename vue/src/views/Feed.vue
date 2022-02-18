@@ -61,7 +61,7 @@ export default {
       const updateIndex = this.posts.findIndex(innerPost => innerPost.id === post.id);
       this.posts.splice(updateIndex, post);
       this.togglePostModalWindow();
-    }
+    },
   },
   computed: {
     editingPost () {
