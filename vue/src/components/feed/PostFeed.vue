@@ -32,13 +32,16 @@
           placeholder="Please enter your comment"
           v-model="comment"
         )
-        .comment-btn(@click="commentPost()") Submit
+        .comment-btn(@click="commentPost()")
+          img( src="@/assets/img/background/send.jpg", class="feed_icon-profile", alt="" )
 </template>
 
 <script>
 import PostApi from "@/api/Post";
 import scrollMixin from '@/mixins/scrollToTop';
 import moment from "moment";
+import CommentApi from "@/api/Comment";
+
 
 export default {
   // props: {
@@ -82,10 +85,16 @@ export default {
     },
 
     commentPost() {
-      // CommentApi.store()
-      //     .then(resp => {
-      //
-      //     })
+      let form = {
+        comment: this.comment
+      }
+       CommentApi.store(form)
+           .then(resp => {
+             console.log(resp)
+           })
+           .catch(error =>{
+             console.log(error)
+       })
     }
   },
 
@@ -101,13 +110,14 @@ export default {
 
 .comment-btn {
   color: #00ad5f;
-  border: 1px solid #00ad5f;
-  padding: 10px;
+  //border: 1px solid #00ad5f;
+  //padding: 10px;
   margin: 5px;
   border-radius: 7px;
   cursor: pointer;
   background-color: #fff;
   transition: all .3s linear;
+  height: 13px;
 }
 
 .comment-btn:hover {
@@ -123,4 +133,5 @@ export default {
 ::-webkit-input-placeholder {
   color: #887f7f;
 }
+
 </style>

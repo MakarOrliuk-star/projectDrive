@@ -32,7 +32,7 @@ Route::group(['prefix' => 'posts'], function() {
 });
 
 Route::group(['prefix' => 'comments'], function() {
-    Route::resource('/', 'CommmentController');
+    Route::resource('/', 'CommentController');
 });
 
 Route::group([
