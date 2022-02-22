@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions} from 'vuex'
 import AuthApi from "@/api/Auth";
 
 const AUTH_ROUTES_NAME = [
@@ -13,9 +13,6 @@ const AUTH_ROUTES_NAME = [
 ]
 
 export default {
-  computed: {
-    ...mapGetters(['getUser']),
-  },
   methods: {
     ...mapActions([
       'setUser'

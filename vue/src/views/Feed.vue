@@ -3,7 +3,6 @@ div
   ButtonFeed(@click="togglePostModalWindow")
   .feed_main
     PostFeed(
-      :posts="posts"
       @editButtonClicked="setEditingPost"
       @deleteButtonClicked="deletePost"
     )

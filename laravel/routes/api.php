@@ -29,11 +29,17 @@ Route::group([
 
 Route::group(['prefix' => 'posts'], function() {
     Route::resource('/', 'PostController');
+    Route::post('/{post}/comment', 'CommentController@store');
 });
+Route::delete('posts/{id}', 'PostController@destroy');
+Route::put('posts/{id}', 'PostController@update');
 
 Route::group(['prefix' => 'comments'], function() {
     Route::resource('/', 'CommentController');
 });
+
+
+Route::put('user/{id}', 'UserController@update');
 
 Route::group([
     'prefix' => 'auth',

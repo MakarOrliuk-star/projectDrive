@@ -29,23 +29,23 @@
             @click="$router.push({name: 'editProfile'})"
           )
           img.feed_icon-profile.feed_icon-profile__border(
-            :src='getImage.img',
-            alt='',
+            :src="getUser.image === null ? '/storage/profile/user.jpg' : getUser.image",
           )
-          .feed_icon-profile.user-profile
+          p.feed_icon-profile.user-profile {{getUser.name}}
     router-view
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+
 export default {
   computed:{
-    ...mapGetters(['getImage']),
-  }
+    ...mapGetters(['getUser']),
+  },
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .feed {
   width: 100%;
   min-height: 100vh;
@@ -116,4 +116,10 @@ export default {
   border-radius: 10px;
 }
 
+.feed_icon-profile.user-profile{
+  position: absolute;
+  top: -5px;
+  right: -45px;
+  color: black;
+}
 </style>

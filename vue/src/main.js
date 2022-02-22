@@ -4,6 +4,9 @@ import router from './router'
 import store from "@/store";
 import VueCompositionAPI from '@vue/composition-api'
 import 'materialize-css/dist/css/materialize.min.css'
+import moment from 'moment'
+
+Vue.prototype.moment = moment
 
 Vue.use(VueCompositionAPI);
 

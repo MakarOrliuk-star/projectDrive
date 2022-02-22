@@ -40,7 +40,6 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->user_id = Auth::user()->id;
-        $post->created_at = $request->input('created_at');
         $post->save();
         return new PostResource($post);
     }
@@ -54,8 +53,20 @@ class PostController extends Controller
     {
 
         $post = Post::find($id);
+
         $post->title = $request->input('title');
-        $post->image = $request->input('image');
+
+        if($request->image) {
+            $base64File = $request->image;
+
+            $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
+            $extension = explode('/', mime_content_type($base64File))[1];
+            $fileName = "/publications/" . time() . '.' . $extension;
+            Storage::disk('public')->put($fileName , $fileData);
+
+            $post->image = $fileName;
+        }
+
         $post->save();
 
         return new PostResource($post);

@@ -10,6 +10,13 @@ class PostApi extends Api {
         return this.axios.get('/posts')
     }
 
+    destroy (id) {
+        return this.axios.delete('/posts/' + id)
+    }
+
+    update (id, data) {
+        return this.axios.put('/posts'+ id, data)
+    }
 }
 
 export default new PostApi()

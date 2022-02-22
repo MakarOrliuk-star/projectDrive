@@ -15,8 +15,7 @@
 import Edit from "@/components/profile/edit/Edit";
 import Preview from "@/components/profile/edit/Preview";
 import ButtonProfile from "@/components/profile/button/ButtonProfile";
-
-import {mapActions} from 'vuex'
+import UserApi from "@/api/User";
 
 export default {
   components:{
@@ -24,23 +23,34 @@ export default {
     Preview,
     ButtonProfile
   },
+
   data(){
     return {
       showInfoWindow: false,
-      previewInfo: null
+      previewInfo: null,
     }
   },
+
   methods:{
-    ...mapActions([
-      'setImage'
-    ]),
+
     toggleInfoWindow(){
       this.showInfoWindow = !this.showInfoWindow;
     },
+
     getPreviewInfo(infoProfiles){
       this.previewInfo = infoProfiles;
-      this.setImage(infoProfiles);
-      this.toggleInfoWindow();
+      let info = {
+        previewInfo: this.previewInfo,
+      }
+      console.log(info)
+      UserApi.update(info)
+      .then(resp => {
+        console.log(resp)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
     }
   },
 }

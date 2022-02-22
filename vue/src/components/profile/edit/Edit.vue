@@ -1,7 +1,7 @@
 <template lang="pug">
   .profile-edit_area
     .profile-edit_pic
-      img(:src='infoProfiles.img', alt='')
+      img(:src='infoProfiles.image', alt='')
     input#inpFile.create-new-post_form-control(type='file' @change="uploadImg")
     .profile-edit_title Логин
     input.profile-edit_input(
@@ -26,9 +26,8 @@
     .profile-edit_title E-mail
     input.profile-edit_input(
       type="email"
-      v-model="infoProfiles.mail"
+      v-model="infoProfiles.email"
       placeholder="Please enter your email here"
-      required
     )
     .profile-edit_title Телефон
     input.profile-edit_input(
@@ -39,36 +38,23 @@
     textarea.profile-edit_input(
       v-model="infoProfiles.aboutYou"
     )
-    button.profile-edit_edit-save(@click="getInfoView") Сохранить изменения
+    button.profile-edit_edit-save(@click.prevent="getInfoView") Сохранить изменения
 </template>
 
 <script>
-import useVuelidate from '@vuelidate/core'
-import { required, email } from '@vuelidate/validators'
-
 export default {
-  setup () {
-    return { v$: useVuelidate() }
-  },
   data(){
     return{
       infoProfiles:{
-        login: '',
-        surname: '',
-        name: '',
-        middleName: '',
-        mail: '',
-        phone: '',
-        aboutYou: '',
-        img:''
+        login: null,
+        surname: null,
+        name: null,
+        middleName: null,
+        email: null,
+        phone: null,
+        aboutYou: null,
+        image: null,
       },
-    }
-  },
-
-  validations: {
-    infoProfiles: {
-      name: { required  },
-      mail: { required, email }
     }
   },
 
@@ -78,13 +64,12 @@ export default {
       let reader = new FileReader();
       reader.readAsDataURL(file)
       reader.onload = () => {
-        this.infoProfiles.img = reader.result;
+        this.infoProfiles.image = reader.result;
       };
     },
+
     getInfoView( ){
-      if(this.infoProfiles.login && this.infoProfiles.phone && this.infoProfiles.mail){
-        this.$emit('profileInfo', this.infoProfiles)
-      }
+      this.$emit('profileInfo', this.infoProfiles)
     },
   }
 }

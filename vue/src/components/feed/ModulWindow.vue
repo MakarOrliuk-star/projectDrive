@@ -54,11 +54,13 @@ export default {
       }
     }
   },
+
   mounted() {
     if (this.editingPost) {
       this.post = Object.assign({}, this.editingPost);
     }
   },
+
   methods: {
     closeModule () {
       this.$emit('close');

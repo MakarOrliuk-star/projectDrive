@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -18,15 +19,11 @@ class UserController extends Controller
 
     public function store(UserRequest $request){
 
-        $validate = $request->validated();
-
-        if(! $validate){
-            return response($validate,400);
-        }
-
         $user = new User;
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+
         $user->save();
 
         return new UserResource($user);
@@ -39,16 +36,22 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        $validate = $request->validated();
+        $user = User::find($id);
 
-        if(! $validate){
-            return response($validate,400);
+        if($request->image) {
+            $base64File = $request->image;
+
+            $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
+            $extension = explode('/', mime_content_type($base64File))[1];
+            $fileName = "/user/" . time() . '.' . $extension;
+            Storage::disk('public')->put($fileName , $fileData);
+
+            $user->image = $fileName;
         }
 
-        $user = User::find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+
         $user->save();
 
         return new UserResource($user);

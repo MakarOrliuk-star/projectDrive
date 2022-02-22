@@ -2,62 +2,40 @@
   div.feed_background
     .feed_post(
       v-for="post in posts"
+      :key="post.id"
     )
-      .feed_post-info
-        .feed_post-info-user
-          .feed_profile-pic
-            img( src="", alt="")
-          .feed_username-post User 1
-        img(src="", class="feed_options", alt="")
-      img(
-        :src="post.image | apiFile",
-        class="post_image-profile",
-        alt=""
+      ModulWindow(
+        v-if="showPostModalWindow"
+        @close="togglePostModalWindow"
       )
-      .feed_post-content
-        .feed_post-content-reaction
-          img( src="", class="feed_icon-profile", alt="")
-          img( src="", class="feed_icon-profile", alt="")
-          img( src="", class="feed_icon-profile", alt="")
-          img( src="", class="feed_icon-profile icon", alt="")
-        p.feed_post-content-likes 1,012 likes
-        p.feed_post-content-description
-          span username
-        p.feed_post-content-description {{post.title}}
-        p.feed_post-content-time {{ moment(post.created_at).format("DD-MM-YYYY") }}
-      .feed_post-comment
-        img( src="", class="feed_icon-profile", alt="")
-        input.feed_post-comment-add(
-          type='text'
-          placeholder="Please enter your comment"
-          v-model="comment"
-        )
-        .comment-btn(@click="commentPost()")
-          img( src="@/assets/img/background/send.jpg", class="feed_icon-profile", alt="" )
+      Post(
+        :post="post"
+        @delete="postDelete(post.id)"
+        @edit="postEdit(post)"
+      )
 </template>
 
 <script>
 import PostApi from "@/api/Post";
 import scrollMixin from '@/mixins/scrollToTop';
 import moment from "moment";
-import CommentApi from "@/api/Comment";
-
+import Post from "@/components/feed/post/Post";
+import ModulWindow from "@/components/feed/ModulWindow";
 
 export default {
-  // props: {
-  //   posts: {
-  //     type: Array,
-  //     default: () => []
-  //   }
-  // },
+  components:{
+    Post,
+    ModulWindow,
+  },
+
   mixins: [scrollMixin],
 
   data() {
     return {
       editedPost: null,
       posts: null,
-      comment: null,
       moment: moment,
+      showPostModalWindow: false,
     }
   },
 
@@ -66,36 +44,40 @@ export default {
   },
 
   methods: {
-    editPost(postId) {
-      this.$emit('editButtonClicked', postId);
-      this.scrollToTop();
-    },
-
-    deletePost(postId) {
-      this.$emit('deleteButtonClicked', postId);
+    togglePostModalWindow () {
+      this.showPostModalWindow = !this.showPostModalWindow;
     },
 
     getPost() {
       PostApi.index()
           .then(resp => {
             this.posts = resp.data.data;
-            console.log(this.posts)
           })
           .catch(console.error);
     },
 
-    commentPost() {
-      let form = {
-        comment: this.comment
-      }
-       CommentApi.store(form)
-           .then(resp => {
-             console.log(resp)
-           })
-           .catch(error =>{
-             console.log(error)
-       })
-    }
+    postDelete(id){
+      PostApi.destroy(id)
+      .then(() => {
+        let index = this.posts.findIndex(post => post.id === id);
+        this.posts.splice(index, 1);
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+    },
+
+    postEdit(post){
+      PostApi.update(post)
+      .then(() => {
+        const updateIndex = this.posts.findIndex(innerPost => innerPost.id === post.id);
+        this.posts.splice(updateIndex, post);
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+      this.togglePostModalWindow();
+    },
   },
 
 }
@@ -106,24 +88,6 @@ export default {
 
 .feed_background {
   grid-row-start: 1;
-}
-
-.comment-btn {
-  color: #00ad5f;
-  //border: 1px solid #00ad5f;
-  //padding: 10px;
-  margin: 5px;
-  border-radius: 7px;
-  cursor: pointer;
-  background-color: #fff;
-  transition: all .3s linear;
-  height: 13px;
-}
-
-.comment-btn:hover {
-  color: #fff;
-  border: 1px solid #00ad5f;
-  background-color: #00ad5f;
 }
 
 .feed_post-comment-add {

@@ -7,11 +7,7 @@
       @click="signIn"
     ) Sign in
     .login_link-container
-      a.login_forgot(href='#')
-        | Forgot
-        strong  password
-        |  or
-      a.login_back(href='#')  Create account
+      a.login_back(@click="goToCreate")  Create account
 </template>
 
 <script>
@@ -52,6 +48,10 @@ export default {
       this.form.email = ''
       this.form.password = ''
     },
+
+    goToCreate(){
+      this.$router.push({ name: 'register' })
+    }
   },
 }
 </script>

@@ -19,13 +19,17 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request){
 
-        $post = Post::findOrFail($request->post_id);
+        $posts = Post::with('comment')->get();
+
+        foreach ($posts as $post){
+            echo $post->comment->name;
+        }
 
         $comment = new Comment;
         $comment->content = $request->input('content');
         $comment->user_id =  Auth::user()->id;
-        $comment->post_id =  $post->id;
-        
+        $comment->post_id =  $posts->id;
+
         $comment->save();
 
         return new CommentResource($comment);
@@ -38,12 +42,6 @@ class CommentController extends Controller
 
     public function update(CommentRequest $request, $id)
     {
-        $validate = $request->validated();
-
-        if(!$validate){
-            return response($validate,400);
-        }
-
         $comment = Comment::find($id);
         $comment->content = $request->input('content');
         $comment->save();
