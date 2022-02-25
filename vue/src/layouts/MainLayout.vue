@@ -19,19 +19,14 @@
             @click="$router.push({name: 'login'})"
           )
           img.feed_icon-profile(
-            src='../assets/img/feed/like.png',
-            alt='',
-            @click="$router.push({name: 'feed'})"
-          )
-          img.feed_icon-profile(
             src='../assets/img/feed/settings.png',
             alt=""
             @click="$router.push({name: 'editProfile'})"
           )
           img.feed_icon-profile.feed_icon-profile__border(
-            :src="getUser.image === null ? '/storage/profile/user.jpg' : getUser.image",
+            :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
           )
-          p.feed_icon-profile.user-profile {{getUser.name}}
+          p.feed_icon-profile.user-profile {{getUser && getUser.name}}
     router-view
 </template>
 
@@ -119,7 +114,6 @@ export default {
 .feed_icon-profile.user-profile{
   position: absolute;
   top: -5px;
-  right: -45px;
   color: black;
 }
 </style>

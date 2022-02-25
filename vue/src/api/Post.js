@@ -15,7 +15,7 @@ class PostApi extends Api {
     }
 
     update (id, data) {
-        return this.axios.put('/posts'+ id, data)
+        return this.axios.put('/posts/'+ id, data)
     }
 }
 

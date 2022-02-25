@@ -8,7 +8,7 @@
           input.create-new-post_form-control(
             type='text',
             required='',
-            v-model="post.title"
+            v-model="posts.title"
           )
       .create-new-post_group-name
         label.create-new-post_label Your image
@@ -20,7 +20,7 @@
           input.create-new-post_form-control(
             type='text',
             required='',
-            v-model="post.comment"
+            v-model="posts.comment"
             )
       .create-new-post_group-name
         button#btn.create-new-post.create-new-post_button.create-new-post_primary-color(
@@ -35,67 +35,50 @@
 </template>
 
 <script>
-import PostApi from "@/api/Post";
-
 export default {
   props: {
-    editingPost: {
+    post: {
       type: Object,
       default: () => {}
     }
   },
+
   data () {
     return {
-      post: {
-        title:'',
-        comment:'',
-        getImg:'',
-        id: ''
+      posts: {
+        title: null,
+        comment: null,
+        image: null,
       }
     }
   },
 
   mounted() {
-    if (this.editingPost) {
-      this.post = Object.assign({}, this.editingPost);
+    if (this.post) {
+      this.posts = Object.assign({}, this.post);
     }
   },
 
   methods: {
-    closeModule () {
+    closeModule() {
       this.$emit('close');
     },
-    uploadImg (event) {
+
+    uploadImg(event) {
       let file = event?.target?.files?.[0];
       let reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onload = () => {
-        this.post.getImg = reader.result;
+        this.posts.image = reader.result;
       };
     },
-    addPost () {
-         if (this.post.getImg && this.post.title && this.post.comment) {
-           const eventName = this.editingPost ? 'postUpdated' : 'postCreated'
 
-           this.$emit(eventName, this.post);
-            let form ={
-              title: this.post.title,
-              image: this.post.getImg,
-            }
-            PostApi.store(form)
-            .then((resp) => {
-              console.log(resp)
-              this.$router.push({ name: 'feed' })
-            })
-            .catch(error =>{
-              console.log(error)
-            })
-         }
-       },
-    }
+    addPost() {
+        this.$emit(this.post ? 'post-updated' : 'post-created', this.posts);
+    },
+  }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import "src/assets/scss/pages/feed/modul.scss";

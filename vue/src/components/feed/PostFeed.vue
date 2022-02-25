@@ -1,85 +1,52 @@
 <template lang="pug">
-  div.feed_background
+  .feed_background
     .feed_post(
       v-for="post in posts"
       :key="post.id"
     )
-      ModulWindow(
-        v-if="showPostModalWindow"
-        @close="togglePostModalWindow"
-      )
       Post(
         :post="post"
-        @delete="postDelete(post.id)"
-        @edit="postEdit(post)"
+        @delete="$emit('deleteButtonClicked', post.id)"
+        @edit="$emit('editButtonClicked', post)"
+        @getComment="storeCommentClick"
+        :comments="comments"
+        @deleteComment="commentDelete"
+        :user="user"
       )
 </template>
 
 <script>
-import PostApi from "@/api/Post";
-import scrollMixin from '@/mixins/scrollToTop';
-import moment from "moment";
 import Post from "@/components/feed/post/Post";
-import ModulWindow from "@/components/feed/ModulWindow";
 
 export default {
-  components:{
-    Post,
-    ModulWindow,
-  },
-
-  mixins: [scrollMixin],
-
-  data() {
-    return {
-      editedPost: null,
-      posts: null,
-      moment: moment,
-      showPostModalWindow: false,
+  props: {
+    posts: {
+      type: Array,
+      default: () => []
+    },
+    comments: {
+      type: Array,
+      default: () => []
+    },
+    user: {
+      type: Object,
+      default: () => {}
     }
   },
 
-  mounted() {
-    this.getPost();
+  components: {
+    Post,
   },
 
-  methods: {
-    togglePostModalWindow () {
-      this.showPostModalWindow = !this.showPostModalWindow;
+  methods:{
+    storeCommentClick(getComment){
+      this.$emit('commentClick', getComment);
     },
 
-    getPost() {
-      PostApi.index()
-          .then(resp => {
-            this.posts = resp.data.data;
-          })
-          .catch(console.error);
-    },
-
-    postDelete(id){
-      PostApi.destroy(id)
-      .then(() => {
-        let index = this.posts.findIndex(post => post.id === id);
-        this.posts.splice(index, 1);
-      })
-      .catch(error =>{
-        console.log(error)
-      })
-    },
-
-    postEdit(post){
-      PostApi.update(post)
-      .then(() => {
-        const updateIndex = this.posts.findIndex(innerPost => innerPost.id === post.id);
-        this.posts.splice(updateIndex, post);
-      })
-      .catch(error =>{
-        console.log(error)
-      })
-      this.togglePostModalWindow();
+    commentDelete(commentId){
+      this.$emit('toggleDeleteComment', commentId);
     },
   },
-
 }
 </script>
 

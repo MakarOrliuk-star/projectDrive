@@ -19,20 +19,16 @@ class CommentController extends Controller
 
     public function store(CommentRequest $request){
 
-        $posts = Post::with('comment')->get();
-
-        foreach ($posts as $post){
-            echo $post->comment->name;
-        }
+        $post = Post::with('comments')->first();
 
         $comment = new Comment;
         $comment->content = $request->input('content');
         $comment->user_id =  Auth::user()->id;
-        $comment->post_id =  $posts->id;
-
+        $comment->post_id =  $post->id;
         $comment->save();
 
         return new CommentResource($comment);
+
     }
 
     public function show(Comment $comment)

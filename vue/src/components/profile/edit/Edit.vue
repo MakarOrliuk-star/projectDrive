@@ -1,38 +1,34 @@
 <template lang="pug">
   .profile-edit_area
     .profile-edit_pic
-      img(:src='infoProfiles.image', alt='')
+      img(
+        :src="user && user.image ? /storage/ + user.image : 'storage/profile/user.jpg'",
+        alt=''
+      )
     input#inpFile.create-new-post_form-control(type='file' @change="uploadImg")
-    .profile-edit_title Логин
-    input.profile-edit_input(
-      type='text'
-      v-model="infoProfiles.login"
-    )
-    .profile-edit_title Фамилия
-    input.profile-edit_input(
-      type='text'
-      v-model="infoProfiles.surname"
-    )
     .profile-edit_title Имя
     input.profile-edit_input(
       type='text'
       v-model="infoProfiles.name"
+      :placeholder= "user && user.name ? user.name : 'Введите ваше имя'"
     )
-    .profile-edit_title Отчество
+    .profile-edit_title Фамилия
     input.profile-edit_input(
       type='text'
-      v-model="infoProfiles.middleName"
+      v-model="infoProfiles.lastname"
+      :placeholder= "user && user.lastname ? user.lastname : 'Введите вашу фамилию'"
     )
     .profile-edit_title E-mail
     input.profile-edit_input(
       type="email"
       v-model="infoProfiles.email"
-      placeholder="Please enter your email here"
+      :placeholder= "user && user.email ? user.email : 'Введите ваш email'"
     )
     .profile-edit_title Телефон
     input.profile-edit_input(
       type='text'
       v-model="infoProfiles.phone"
+      :placeholder= "user && user.phone ? user.phone : 'Введите ваш номер телефона'"
     )
     .profile-edit_title О себе
     textarea.profile-edit_input(
@@ -46,10 +42,8 @@ export default {
   data(){
     return{
       infoProfiles:{
-        login: null,
-        surname: null,
         name: null,
-        middleName: null,
+        lastname: null,
         email: null,
         phone: null,
         aboutYou: null,
@@ -57,6 +51,14 @@ export default {
       },
     }
   },
+
+  props:{
+    user: {
+      type: Object,
+      default: () => {}
+    },
+  },
+
 
   methods:{
     uploadImg(event){
@@ -70,6 +72,7 @@ export default {
 
     getInfoView( ){
       this.$emit('profileInfo', this.infoProfiles)
+      this.infoProfiles = ''
     },
   }
 }

@@ -25,9 +25,9 @@ export default {
             this.setUser(response.data.data)
           })
           .catch(console.error)
+      }
     }
   }
-}
 </script>
 
 <style>

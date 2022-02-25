@@ -1,6 +1,6 @@
 <template lang="pug">
-    .feed_button-create
-      button.feed_button-create-post(type='button', name='foo', value='upvote', @click="$emit('click')") Create post
+  .feed_button-create
+    button.feed_button-create-post(type='button', name='foo', value='upvote', @click="$emit('click')") Create post
 </template>
 
 <script>
@@ -11,5 +11,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/scss/pages/feed/button.scss";
-
+.feed_button-create{
+  height: 10px;
+}
 </style>

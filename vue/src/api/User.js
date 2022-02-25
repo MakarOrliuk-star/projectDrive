@@ -7,7 +7,7 @@ class UserApi extends Api {
     }
 
     show (id) {
-        return this.axios.get('/user' + id)
+        return this.axios.get('/user/' + id)
     }
 
     store(data){
@@ -19,7 +19,7 @@ class UserApi extends Api {
     }
 
     destroy(id){
-        return this.axios.delete('/user' + id)
+        return this.axios.delete('/user/' + id)
     }
 }
 

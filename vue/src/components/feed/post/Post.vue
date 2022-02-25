@@ -2,9 +2,11 @@
   div
     .feed_post-info
       .feed_post-info-user
-        .feed_profile-pic
-          img( src="", alt="")
-        .feed_username-post User 1
+        img.feed_profile-pic(
+          :src="user && user.image ? /storage/ + user.image : 'storage/profile/user.jpg'",
+          alt=""
+        )
+        .feed_username-post {{user && user.name}}
     img(
       :src="post.image | apiFile",
       class="post_image-profile",
@@ -19,36 +21,47 @@
         span username
       p.feed_post-content-description {{post.title}}
       p.feed_post-content-time {{ moment(post.created_at).format("h:mm:ss") }}
-      CommentSection(
+      Comment(
         @commentPost ="getCommentPost"
+        :comment="comments"
       )
+      div
+        div.feed_post-content-comments(
+          v-for="(comment, index) in  comments"
+          :key="index"
+        ) {{comment.content}}
+          div.comment-btn-delete(
+            @click="$emit('deleteComment', comment.id)"
+          ) Delete
 </template>
 
 <script>
-import CommentSection from "@/components/post/comment/Comment";
+import Comment from "@/components/post/comment/Comment";
 
 export default {
-  data(){
-    return{
-      comments: null,
-    }
-  },
-
   components:{
-    CommentSection
+    Comment
   },
 
   props:{
     post: {
       type: Object,
       default: () => {}
-    }
+    },
+    comments: {
+      type: Array,
+      default: () => []
+    },
+    user: {
+      type: Object,
+      default: () => {}
+    },
   },
 
   methods:{
-    getCommentPost(Comments){
-      this.comments = Comments;
-      this.post['comments'] = Comments;
+    getCommentPost(comment){
+      this.post['content'] = comment
+      this.$emit('getComment', this.post);
     },
 
     deletePost(){
@@ -58,6 +71,9 @@ export default {
     editPost(){
       this.$emit('edit');
     },
+    deleteComment(){
+      this.$emit('deleteComment');
+    }
   },
 }
 </script>
@@ -82,9 +98,29 @@ export default {
   background-color: #00ad5f;
 }
 
-
 .feed_post-content-likes{
   display: inline-block;
   width: 100%;
 }
+
+.feed_post-content-comments{
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-btn-delete{
+  color: #00ad5f;
+  border: 1px solid #00ad5f;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all .3s linear;
+}
+
+.comment-btn-delete:hover {
+  color: #fff;
+  border: 1px solid #00ad5f;
+  background-color: #00ad5f;
+}
+
 </style>

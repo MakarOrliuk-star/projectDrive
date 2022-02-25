@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
             'name' => 'required',
             'email' =>  'required',
             'image' => 'required',
+            'phone' => 'required',
         ];
     }
 }

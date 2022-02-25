@@ -1,11 +1,13 @@
 <template lang="pug">
   .feed_profile-menu
     .feed_profile-card
-      .feed_profile-pic
-        img(src='', alt='')
+      img.feed_profile-pic(
+          :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
+          alt=''
+      )
       div
         p.feed_username-profile Makar Orliuk
-        p.feed_profile-sub-text @VM_tekken
+        p.feed_profile-sub-text {{getUser && getUser.email}}
       button.feed_profile-action-btn Follow
     p.feed_profile-suggestion-text Suggestions for you
     .feed_profile-card(v-for="follower in followers" :key="follower.id")
@@ -18,7 +20,11 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
+  computed:{
+    ...mapGetters(['getUser']),
+  },
   data () {
     return {
       followers: []

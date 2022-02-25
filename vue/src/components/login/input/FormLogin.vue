@@ -1,7 +1,13 @@
 <template lang="pug">
   .login_title
     label.login_title_label Login
-    input.login_input(type='email', name='email', placeholder='Email', v-model="form.email")
+    input.login_input(
+      type='email',
+      name='email',
+      placeholder='Email',
+      v-model="form.email"
+      :error-message="nameError"
+    )
     input.login_input(type='password', name='pswd', placeholder='Password', v-model="form.password")
     button(
       @click="signIn"
@@ -11,24 +17,28 @@
 </template>
 
 <script>
-import { required, email, minLength } from '@vuelidate/validators'
-import AuthApi from '@/api/Auth'
-import Cookies from 'js-cookie'
+import {validationMixin} from 'vuelidate';
+import {required} from 'vuelidate/lib/validators'
 
 export default {
+  mixin:[validationMixin,],
+
+  computed:{
+   nameErrors(){
+     const errors = []
+     if(!this.$v.form.email.required){
+       errors.push('Обязательно для заполнения')
+     }
+     return errors
+   }
+  },
+
   data(){
     return{
       form: {
-        email: '',
-        password: ''
+        email: null,
+        password: null,
       }
-    }
-  },
-
-  validations: {
-    form: {
-      email: { required, email },
-      password: { required, min: minLength(8)  },
     }
   },
 
@@ -37,20 +47,19 @@ export default {
       if(this.form.email && this.form.password){
         this.$emit('getForm', this.form)
       }
-      AuthApi.login(this.form)
-          .then((resp) => {
-            Cookies.set('userToken', resp.data['access_token'])
-            this.$router.push({name: 'feed'})
-          })
-          .catch(error =>{
-            console.log(error)
-          })
       this.form.email = ''
       this.form.password = ''
     },
 
     goToCreate(){
       this.$router.push({ name: 'register' })
+    }
+  },
+
+  validations: {
+    form: {
+      email: { required,  },
+      password: { required,  },
     }
   },
 }

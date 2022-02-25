@@ -1,10 +1,14 @@
 <template lang="pug">
   .profile-card
-    PopupProfile(v-if="isShow" @close="togglePopup")
+    PopupProfile(
+      v-if="isShow"
+      @close="togglePopup"
+      :user="getUser"
+    )
     .profile-card_header
       .profile-card_pic
         img(
-          :src="getUser.image === null ? '/storage/profile/user.jpg' : getUser.image",
+          :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
         )
       .profile-card_name Makar Orliuk
       .profile-card_desc Web Developer

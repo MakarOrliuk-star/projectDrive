@@ -54,8 +54,6 @@ class PostController extends Controller
 
         $post = Post::find($id);
 
-        $post->title = $request->input('title');
-
         if($request->image) {
             $base64File = $request->image;
 
@@ -66,6 +64,8 @@ class PostController extends Controller
 
             $post->image = $fileName;
         }
+
+        $post->title = $request->input('title');
 
         $post->save();
 

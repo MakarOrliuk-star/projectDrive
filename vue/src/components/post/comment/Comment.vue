@@ -1,6 +1,5 @@
 <template lang="pug">
   .feed_post-comment
-    img( src="", class="feed_icon-profile", alt="")
     input.feed_post-comment-add(
       type='text'
       placeholder="Please enter your comment"
@@ -18,11 +17,19 @@ export default {
     }
   },
 
+  props:{
+    comment: {
+      type: Array,
+      default: () => []
+    },
+  },
+
   methods:{
     PostComment(){
       if(this.comments){
         this.$emit('commentPost', this.comments)
       }
+      this.comments = ''
     }
   }
 }
@@ -33,8 +40,6 @@ export default {
 
 .comment-btn {
   color: #00ad5f;
-  //border: 1px solid #00ad5f;
-  //padding: 10px;
   margin: 5px;
   border-radius: 7px;
   cursor: pointer;
