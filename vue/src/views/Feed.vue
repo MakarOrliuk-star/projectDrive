@@ -1,41 +1,42 @@
 <template lang="pug">
-div
-  ButtonFeed(@click="togglePostModalWindow")
-  .feed_main
-    PostFeed(
-      :posts="posts"
-      @editButtonClicked="setEditingPost"
-      @deleteButtonClicked="deletePost"
-      @commentClick="commentCreate"
-      :comments="comments"
-      @toggleDeleteComment="toggleDeleteCommentId"
-      :user="getUser"
+  div
+    ButtonFeed(
+      @click="togglePostModalWindow"
     )
-    MenuFeed
-    ModulWindow(
-      v-if="showPostModalWindow"
-      @post-created="handlePostCreate"
-      @post-updated="handlePostUpdate"
-      @close="togglePostModalWindow"
-      :post="editingPostId"
-    )
+    .feed_main
+      PostFeed(
+        :posts="posts"
+        @editButtonClicked="setEditingPost"
+        @deleteButtonClicked="deletePost"
+        @commentClick="commentCreate"
+        @toggleDeleteComment="toggleDeleteCommentId"
+      )
+      MenuFeed
+      ModulWindow(
+        v-if="showPostModalWindow"
+        @post-created="handlePostCreate"
+        @post-updated="handlePostUpdate"
+        @close="togglePostModalWindow"
+        :post="editingPostId"
+      )
 </template>
 
 <script>
 import ButtonFeed from "@/components/feed/ButtonFeed";
 import MenuFeed from "@/components/feed/MenuFeed";
-import ModulWindow from "@/components/feed/ModulWindow";
+import ModulWindow from "@/components/feed/ModalWindow";
 import PostFeed from "@/components/feed/PostFeed";
 import PostApi from "@/api/Post";
 import CommentApi from "@/api/Comment";
 import {mapGetters} from 'vuex'
 import scrollToTop from "@/mixins/scrollToTop";
 
+// mixins, components, props, data, watch, created, mounted, updated, methods, computed
 
 export default {
-  mixins: [scrollToTop],
+  mixins: [scrollToTop,],
   computed: {
-    editingPost () {
+    editingPost() {
       return this.editingPostId && this.posts.find(post => post.id === this.editingPostId);
     },
     ...mapGetters(['getUser']),
@@ -47,29 +48,27 @@ export default {
     ModulWindow,
     PostFeed
   },
-  data () {
+  data() {
     return {
       showPostModalWindow: false,
       posts: null,
       editingPostId: null,
-      comments: null,
     }
   },
 
   mounted() {
     this.getPosts()
-    this.getComment()
   },
 
   methods: {
-    getPosts(){
+    getPosts() {
       PostApi.index()
-      .then(resp => {
-        this.posts = resp.data.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
+          .then(resp => {
+            this.posts = resp.data.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
     },
 
     handlePostCreate(post) {
@@ -97,67 +96,61 @@ export default {
           });
     },
 
-    togglePostModalWindow () {
+    togglePostModalWindow() {
       if (this.showPostModalWindow) {
         this.editingPostId = null;
       }
       this.showPostModalWindow = !this.showPostModalWindow;
     },
 
-    deletePost (postId) {
+    deletePost(postId) {
       PostApi.destroy(postId)
-      .then(() => {
-        const postIndex = this.posts.findIndex(post => postId === post.id);
-        this.posts.splice(postIndex, 1);
-      })
-      .catch(error =>{
-        console.log(error)
-      })
+          .then(() => {
+            const postIndex = this.posts.findIndex(post => postId === post.id);
+            this.posts.splice(postIndex, 1);
+          })
+          .catch(error => {
+            console.log(error)
+          })
     },
 
-    setEditingPost (postId) {
+    setEditingPost(postId) {
       this.editingPostId = postId;
       this.togglePostModalWindow();
     },
 
-    commentCreate(post){
+    commentCreate(post) {
       console.log(post)
-      CommentApi.store(post)
-      .then(resp => {
-        this.comments.push(resp.data.data)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      let form ={
+        content: post.comments,
+      }
+      console.log(form)
+      CommentApi.store(post.id, form)
+          .then(resp => {
+            console.log(resp)
+          })
+          .catch(error => {
+            console.log(error)
+          })
     },
 
-    getComment(){
-      CommentApi.index()
-      .then(resp => {
-        this.comments = resp.data.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    },
-
-    toggleDeleteCommentId(commentId){
+    toggleDeleteCommentId(commentId) {
       console.log(commentId)
       CommentApi.destroy(commentId)
-      .then(() =>{
-        const commentIndex = this.posts.findIndex(comment => commentId === comment.id);
-        this.comments.splice(commentIndex, 1);
-      })
-      .catch(error => {
-        console.log(error)
-      })
+          .then(() => {
+            const commentIndex = this.posts.findIndex(comment => commentId === comment.id);
+            this.posts.comments.splice(commentIndex, 1);
+          })
+          .catch(error => {
+            console.log(error)
+          })
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.feed_main{
+.feed_main {
   width: 70%;
   max-width: 1000px;
   display: grid;

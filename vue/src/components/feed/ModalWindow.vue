@@ -30,7 +30,7 @@
           | Send
           | Post
       span.create-new-post_close(
-        @click="closeModule"
+        @click="closeModal"
       ) X
 </template>
 
@@ -60,7 +60,7 @@ export default {
   },
 
   methods: {
-    closeModule() {
+    closeModal() {
       this.$emit('close');
     },
 
@@ -81,5 +81,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/scss/pages/feed/modul.scss";
+@import "../../assets/scss/pages/feed/modall";
 </style>

@@ -3,10 +3,10 @@
     .feed_post-info
       .feed_post-info-user
         img.feed_profile-pic(
-          :src="user && user.image ? /storage/ + user.image : 'storage/profile/user.jpg'",
+          :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
           alt=""
         )
-        .feed_username-post {{user && user.name}}
+        .feed_username-post {{getUser && getUser.name}}
     img(
       :src="post.image | apiFile",
       class="post_image-profile",
@@ -23,24 +23,28 @@
       p.feed_post-content-time {{ moment(post.created_at).format("h:mm:ss") }}
       Comment(
         @commentPost ="getCommentPost"
-        :comment="comments"
       )
       div
-        div.feed_post-content-comments(
-          v-for="(comment, index) in  comments"
+        .feed_post-content-comments(
+          v-for="(comment, index) in  post.comments"
           :key="index"
         ) {{comment.content}}
-          div.comment-btn-delete(
+          .comment-btn-delete(
             @click="$emit('deleteComment', comment.id)"
           ) Delete
 </template>
 
 <script>
 import Comment from "@/components/post/comment/Comment";
+import {mapGetters} from "vuex";
 
 export default {
   components:{
     Comment
+  },
+
+  computed:{
+    ...mapGetters(['getUser']),
   },
 
   props:{
@@ -48,20 +52,12 @@ export default {
       type: Object,
       default: () => {}
     },
-    comments: {
-      type: Array,
-      default: () => []
-    },
-    user: {
-      type: Object,
-      default: () => {}
-    },
   },
 
   methods:{
     getCommentPost(comment){
-      this.post['content'] = comment
-      this.$emit('getComment', this.post);
+      this.post.comments.push(comment)
+      this.$emit('getComment');
     },
 
     deletePost(){

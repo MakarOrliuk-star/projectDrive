@@ -6,9 +6,13 @@
       name='email',
       placeholder='Email',
       v-model="form.email"
-      :error-message="nameError"
     )
-    input.login_input(type='password', name='pswd', placeholder='Password', v-model="form.password")
+    input.login_input(
+      type='password',
+      name='pswd',
+      placeholder='Password',
+      v-model="form.password"
+    )
     button(
       @click="signIn"
     ) Sign in
@@ -17,22 +21,9 @@
 </template>
 
 <script>
-import {validationMixin} from 'vuelidate';
-import {required} from 'vuelidate/lib/validators'
+import { required, } from 'vuelidate/lib/validators'
 
 export default {
-  mixin:[validationMixin,],
-
-  computed:{
-   nameErrors(){
-     const errors = []
-     if(!this.$v.form.email.required){
-       errors.push('Обязательно для заполнения')
-     }
-     return errors
-   }
-  },
-
   data(){
     return{
       form: {
@@ -47,8 +38,6 @@ export default {
       if(this.form.email && this.form.password){
         this.$emit('getForm', this.form)
       }
-      this.form.email = ''
-      this.form.password = ''
     },
 
     goToCreate(){

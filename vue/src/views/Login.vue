@@ -26,16 +26,17 @@ export default {
       AuthApi.login(this.form)
           .then((resp) => {
             Cookies.set('userToken', resp.data['access_token'])
-            this.$router.push({name: 'feed'})
-            this.$toaster.success('Вы успешно вошли в учетную запись')
+              this.$router.push({name: 'feed'})
+              this.$toaster.success('Вы успешно вошли в учетную запись')
           })
-          .catch(error => {
-            console.log(error)
+          .catch(() => {
+            this.$toaster.error('Введен неверный логин или пароль')
           })
     }
   },
 }
 </script>
+
 <style lang="scss" scoped>
 @import "src/assets/scss/pages/auth/login.scss";
 
