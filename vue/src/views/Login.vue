@@ -2,13 +2,14 @@
   .login_wrapper
     FormLogin(
     @getForm ="currentForm"
-    :form ="form"
     )
 </template>
 
 <script>
 import FormLogin from "@/components/login/input/FormLogin";
-import {mapActions} from 'vuex'
+import AuthApi from "@/api/Auth";
+import Cookies from "js-cookie";
+
 export default {
   components:{
     FormLogin
@@ -19,15 +20,20 @@ export default {
       form: ''
     }
   },
-  methods:{
-    ...mapActions([
-       'setUser'
-    ]),
-    currentForm (form) {
+  methods: {
+    currentForm(form) {
       this.form = form;
-      this.setUser(form);
+      AuthApi.login(this.form)
+          .then((resp) => {
+            Cookies.set('userToken', resp.data['access_token'])
+            this.$router.push({name: 'feed'})
+            this.$toaster.success('Вы успешно вошли в учетную запись')
+          })
+          .catch(error => {
+            console.log(error)
+          })
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

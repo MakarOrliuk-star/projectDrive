@@ -2,8 +2,11 @@
 div.profile_position
   .profile-card_header
     .profile-card_pic
-      img(:src="previewInfo.img" alt='')
-    .profile-card_name {{previewInfo.name}} {{previewInfo.surname}}
+      img(
+        :src="previewInfo.image"
+        alt=''
+      )
+    .profile-card_name {{previewInfo.name}} {{previewInfo.lastname}}
     .profile-card_desc Web Developer
     .profile-card_links
       a.profile-card_icon(href='https://www.facebook.com/')
@@ -30,6 +33,7 @@ div.profile_position
 
 <script>
 export default {
+
   props:{
     previewInfo: {
       type: Object,

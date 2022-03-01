@@ -8,17 +8,8 @@ class Post extends Model
 {
     protected $fillable = [
         'title',
-        'image'
+        'image',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('commentCount', function ($builder) {
-            $builder->withCount('comments');
-        });
-    }
 
     public function user(){
         return $this->belongsTo(User::class);

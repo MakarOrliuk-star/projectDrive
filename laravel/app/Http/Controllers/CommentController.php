@@ -2,37 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
     public function index(){
-        //
+
+        $comments = Comment::all();
+        return CommentResource::collection($comments);
     }
 
-    public function store(Request $request){
+    public function store(CommentRequest $request){
+
+        $post = Post::with('comments')->first();
+
         $comment = new Comment;
-        $comment->body = $request->input('body');
-        $comment->post_id = $request->input('post_id');
-        $comment->user_id = $request->input('user_id');
+        $comment->content = $request->input('content');
+        $comment->user_id =  Auth::user()->id;
+        $comment->post_id =  $post->id;
         $comment->save();
+
+        return new CommentResource($comment);
+
+    }
+
+    public function show(Comment $comment)
+    {
         return $comment;
     }
 
-    public function show($id)
+    public function update(CommentRequest $request, $id)
     {
-        //
-    }
+        $comment = Comment::find($id);
+        $comment->content = $request->input('content');
+        $comment->save();
 
-    public function getCommentsByPostId($id){
-        $comments = Comment::where('post_id',$id)->orderBy('id', 'desc')->get();
-        return $comments;
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
+        return new CommentResource($comment);
     }
 
     public function destroy($id)

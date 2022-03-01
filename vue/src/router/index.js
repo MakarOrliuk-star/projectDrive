@@ -1,5 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import AuthLayout from "@/layouts/AuthLayout";
+import MainLayout from "@/layouts/MainLayout";
+import Login from "@/views/Login";
+import Feed from "@/views/Feed";
+import Registration from "@/views/Registration";
+import Profile from "@/views/Profile";
+import EditProfile from "@/views/EditProfile";
 
 Vue.config.productionTip = false
 
@@ -17,39 +24,46 @@ const router = new VueRouter({
     routes: [
         {
             path: "/auth",
-            component: () => import('@/layouts/AuthLayout.vue'),
+            component: AuthLayout,
+            props:true,
             children: [
                 {
                     path: "login",
                     name:'login',
-                    component: () => import('@/views/Login.vue')
+                    component: Login,
+                    props: true
                 },
                 {
-                    path: "reset",
-                    name:'reset',
-                    component: () => import('@/views/Registration.vue')
+                    path: "register",
+                    name:'register',
+                    component: Registration,
+                    props: true
                 },
             ]
         },
         {
             path: "/",
             name:'home',
-            component: () => import('@/layouts/MainLayout.vue'),
+            component: MainLayout,
+            props:true,
             children:[
                 {
                     path: "profile",
                     name: "profile",
-                    component: () => import('@/views/Profile.vue'),
+                    component: Profile,
+                    props: true
                 },
                 {
                     path: "feed",
                     name: "feed",
-                    component: () => import('@/views/Feed.vue'),
+                    component: Feed,
+                    props: true
                 },
                 {
                     path: "editprofile",
                     name: "editProfile",
-                    component: () => import('@/views/EditProfile.vue'),
+                    component: EditProfile,
+                    props: true
                 }
             ]
         },

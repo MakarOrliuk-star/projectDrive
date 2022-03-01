@@ -1,9 +1,15 @@
 <template lang="pug">
   .profile-card
-    PopupProfile(v-if="isShow" @close="togglePopup")
+    PopupProfile(
+      v-if="isShow"
+      @close="togglePopup"
+      :user="getUser"
+    )
     .profile-card_header
       .profile-card_pic
-        img(src='../assets/img/card/main1.jpeg' alt='')
+        img(
+          :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
+        )
       .profile-card_name Makar Orliuk
       .profile-card_desc Web Developer
       .profile-card_links
@@ -45,8 +51,13 @@
 
 <script>
 import PopupProfile from "@/components/profile/contact/PopupProfile";
+import {mapGetters} from 'vuex'
 
 export default {
+  computed:{
+    ...mapGetters(['getUser']),
+  },
+
   data(){
     return{
       isShow: false

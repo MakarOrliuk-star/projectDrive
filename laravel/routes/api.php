@@ -14,24 +14,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
 
 Route::group([
-    'middleware' => 'api',
     'prefix' => 'auth'
-], function ($router) {
-    Route::post('/login', 'AuthController@login');
-    Route::post('/logout', 'AuthController@logout');
-    Route::post('/refresh', 'AuthController@refresh');
-    Route::post('/me', 'AuthController@me');
+], function() {
+    Route::post('register', 'RegisterController@register');
+    Route::post('login', 'AuthController@login');
+    Route::post('refresh', 'AuthController@refresh');
 });
 
-Route::resource('posts', 'PostController');
+Route::group(['prefix' => 'posts'], function() {
+    Route::resource('/', 'PostController');
+});
 
-Route::get('comments/post/{id}','CommentController@getCommentsByPostId');
-Route::resource('comments', 'CommentController');
+Route::delete('posts/{id}', 'PostController@destroy');
+Route::put('posts/{id}', 'PostController@update');
 
-Route::get('post/{id}/isliked', 'PostController@isLiked');
-Route::post('post/like', 'PostController@like');
+Route::group(['prefix' => 'comments'], function() {
+    Route::resource('/', 'CommentController');
+});
+
+Route::delete('comments/{id}', 'CommentController@destroy');
+
+Route::put('user/{id}', 'UserController@update');
+
+Route::group([
+    'prefix' => 'auth',
+    'middleware' => ['jwt.auth', 'jwt.refresh']
+], function() {
+    Route::post('me', 'AuthController@me');
+});
+
+Route::group(['prefix' => 'posts'], function (){
+    Route::get('{id}/isliked', 'PostController@isLiked');
+    Route::post('like', 'PostController@like');
+});
+
