@@ -6,7 +6,11 @@
       v-model="content"
     )
     .comment-btn(@click="postCommentClickButton")
-      img( src="@/assets/img/background/send.jpg", class="feed_icon-profile", alt="" )
+      img(
+        src="@/assets/img/feed/sendImage.png",
+        class="feed_icon-profile",
+        alt=""
+      )
 </template>
 
 <script>
@@ -43,6 +47,6 @@ export default {
 .comment-btn:hover {
   color: #fff;
   border: 1px solid #00ad5f;
-  background-color: #00ad5f;
+  background-color: #fff;
 }
 </style>

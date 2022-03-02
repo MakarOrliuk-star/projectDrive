@@ -14,11 +14,6 @@
             @click="$router.push({ name: 'profile' })"
           )
           img.feed_icon-profile(
-            src='../assets/img/feed/exp.png',
-            alt='',
-            @click="$router.push({name: 'login'})"
-          )
-          img.feed_icon-profile(
             src='../assets/img/feed/settings.png',
             alt=""
             @click="$router.push({name: 'editProfile'})"
@@ -36,6 +31,7 @@
 <script>
 import AuthApi from "@/api/Auth";
 import {mapGetters} from 'vuex'
+import Cookies from "js-cookie";
 
 export default {
   computed:{
@@ -46,6 +42,7 @@ export default {
     logOut(){
       AuthApi.logout()
       .then(() => {
+        Cookies.remove('userToken','access_token')
         this.$router.push({name: 'login'})
       })
       .then(error => {

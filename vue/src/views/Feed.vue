@@ -29,12 +29,10 @@ import PostFeed from "@/components/feed/PostFeed";
 import PostApi from "@/api/Post";
 import CommentApi from "@/api/Comment";
 import {mapGetters} from 'vuex'
-import scrollToTop from "@/mixins/scrollToTop";
 
 // mixins, components, props, data, watch, created, mounted, updated, methods, computed
 
 export default {
-  mixins: [scrollToTop,],
   computed: {
     editingPost() {
       return this.editingPostId && this.posts.find(post => post.id === this.editingPostId);
@@ -53,9 +51,9 @@ export default {
       showPostModalWindow: false,
       posts: null,
       editingPostId: null,
+      comments: null,
     }
   },
-
   mounted() {
     this.getPosts()
   },
@@ -74,7 +72,13 @@ export default {
     handlePostCreate(post) {
       PostApi.store(post)
           .then(resp => {
-            this.posts.push(resp.data.data)
+            console.log(resp)
+            if (resp.data === ''){
+              this.$toaster.error('Добавьте аватарку для создания поста.')
+            } else{
+              this.posts.push(resp.data.data)
+              this.$toaster.success('Пост успешно создан')
+            }
           })
           .catch(console.error)
           .finally(() => {
@@ -120,11 +124,9 @@ export default {
     },
 
     commentCreate(post) {
-      console.log(post)
       let form ={
-        content: post.comments,
+        content: post.comments.toString(),
       }
-      console.log(form)
       CommentApi.store(post.id, form)
           .then(resp => {
             console.log(resp)
@@ -134,12 +136,15 @@ export default {
           })
     },
 
-    toggleDeleteCommentId(commentId) {
-      console.log(commentId)
-      CommentApi.destroy(commentId)
-          .then(() => {
-            const commentIndex = this.posts.findIndex(comment => commentId === comment.id);
-            this.posts.comments.splice(commentIndex, 1);
+    toggleDeleteCommentId(post) {
+      console.log(post)
+      let form = {
+        commentId: this.post.comments.id,
+      }
+      console.log(form)
+      CommentApi.destroy(post.id, form)
+          .then(resp => {
+            console.log(resp)
           })
           .catch(error => {
             console.log(error)

@@ -7,6 +7,8 @@ import Feed from "@/views/Feed";
 import Registration from "@/views/Registration";
 import Profile from "@/views/Profile";
 import EditProfile from "@/views/EditProfile";
+import Cookies from "js-cookie";
+import notFound from "@/components/error/NotFound";
 
 Vue.config.productionTip = false
 
@@ -67,7 +69,30 @@ const router = new VueRouter({
                 }
             ]
         },
+        {
+            path: "*",
+            name: '404',
+            component: notFound,
+            props: true
+        },
     ],
 });
+
+router.beforeEach((to, from,next) => {
+
+    const accessToken = Cookies.get('userToken', 'access_token')
+
+    if(!accessToken){
+        if(to.name === 'login' || to.name === 'register' ) {
+            return next()
+        } else{
+            return next({
+                name: 'login'
+            })
+        }
+    }
+
+    next()
+})
 
 export default router

@@ -24,6 +24,9 @@
       v-model="infoProfiles.lastname"
       :placeholder= "user && user.lastname ? user.lastname : 'Введите вашу фамилию'"
     )
+    span.invalid-feedback(
+      v-if="!$v.infoProfiles.lastname.required"
+    ) LastName is required
     .profile-edit_title E-mail
     input.profile-edit_input(
       type="email"
@@ -39,10 +42,16 @@
       v-model="infoProfiles.phone"
       :placeholder= "user && user.phone ? user.phone : 'Введите ваш номер телефона'"
     )
+    span.invalid-feedback(
+      v-if="!$v.infoProfiles.phone.required"
+    ) Phone is required
     .profile-edit_title О себе
     textarea.profile-edit_input(
       v-model="infoProfiles.aboutYou"
     )
+    span.invalid-feedback(
+      v-if="!$v.infoProfiles.aboutYou.required"
+    ) Information about yourself is required
     button.profile-edit_edit-save(
       @click.prevent="getInfoView"
       :disabled="this.isDisabled"

@@ -30,13 +30,14 @@ class CommentPolicy
      */
     public function view(User $user, User $model)
     {
-        $start = Carbon::parse($model->created_at);;
+        $start = Carbon::parse($model->created_at);
         $now = Carbon::now();
         $days_count = $start->diffInDays($now);
 
-        if($days_count <= 2){
+        if($days_count <=2){
             return false;
         }
+
     }
 
     /**

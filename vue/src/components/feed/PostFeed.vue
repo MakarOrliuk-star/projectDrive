@@ -29,8 +29,9 @@ export default {
   },
 
   methods:{
-    commentDelete(commentId){
-      this.$emit('toggleDeleteComment', commentId);
+    commentDelete(post){
+      this.posts= post
+      this.$emit('toggleDeleteComment', post);
     },
   },
 }
@@ -41,10 +42,6 @@ export default {
 
 .feed_background {
   grid-row-start: 1;
-}
-
-.feed_post-comment-add {
-  margin: 2% !important;
 }
 
 ::-webkit-input-placeholder {

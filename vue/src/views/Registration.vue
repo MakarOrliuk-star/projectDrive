@@ -16,6 +16,9 @@
         placeholder='Email',
         v-model="form.email"
       )
+      span.invalid-feedback(
+        v-if="!$v.form.email.required"
+      ) Email is required
       input.login_input(
         type='password',
         name='pswd',
@@ -35,6 +38,7 @@
         @click="SignUp"
         :disabled="this.isDisabled"
       ) Sign up
+      a(@click="backToSignIn") Back to Sign in
     .login_link-container
 </template>
 
@@ -90,6 +94,10 @@ export default {
           .catch(error => {
             console.log(error)
           })
+    },
+
+    backToSignIn(){
+      this.$router.push({name: 'login'})
     }
   },
   validations: {

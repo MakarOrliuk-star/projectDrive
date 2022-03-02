@@ -7,7 +7,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,22 +19,27 @@ class PostController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $posts = Post::all()->load('comments');
+
+        if ($user->can('view', $posts)) {
+            return false;
+        }
 
         return PostResource::collection($posts);
     }
 
     public function store(PostRequest $request)
     {
-            $post = new Post();
-
-            if($request->image) {
+        $post = new Post();
+        if (Gate::allows('create-post-with-avatar', $post)) {
+            if ($request->image) {
                 $base64File = $request->image;
 
                 $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
                 $extension = explode('/', mime_content_type($base64File))[1];
                 $fileName = "/publications/" . time() . '.' . $extension;
-                Storage::disk('public')->put($fileName , $fileData);
+                Storage::disk('public')->put($fileName, $fileData);
 
                 $post->image = $fileName;
             }
@@ -44,6 +49,7 @@ class PostController extends Controller
             $post->save();
             return new PostResource($post);
         }
+    }
 
     public function show(Post $post)
     {
@@ -52,9 +58,7 @@ class PostController extends Controller
 
     public function update(PostRequest $request, $id)
     {
-
         $post = Post::find($id);
-
         if($request->image) {
             $base64File = $request->image;
 
@@ -76,6 +80,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $post->comments()->delete();
         $post-> delete();
 
         return response()->json(['Post Has Been Deleted']);

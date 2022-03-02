@@ -23,6 +23,17 @@ Route::group(['prefix' => 'auth', 'middleware' => ['jwt.auth', 'jwt.refresh']], 
     Route::post('me', 'AuthController@me');
 });
 
+//Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function() {
+//Route::group(['prefix' => 'auth'],function() {
+//    Route::post('me', 'AuthController@me');
+//});
+//    Route::group(['prefix' => 'posts'], function() {
+//        Route::resource('/', 'PostController')->only(['index', 'store', 'show', 'update', 'destroy']);
+//        Route::resource('/{post}/comments', 'CommentController');
+//        Route::resource('/comments', 'CommentController')->only(['index', 'store', 'show', 'update', 'destroy']);
+//    });
+//});
+
 Route::group(['prefix' => 'auth'], function() {
     Route::post('register', 'RegisterController@register');
     Route::post('login', 'AuthController@login');
@@ -30,13 +41,19 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('logout', 'AuthController@logout');
 });
 
-Route::group(['prefix' => 'posts'], function() {
-    Route::resource('/', 'PostController')->only(['index', 'store', 'show', 'update', 'destroy']);
+Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function() {
+    Route::resource('/', 'PostController');
+    Route::post('/','PostController@store');
     Route::resource('/{post}/comments', 'CommentController');
-    Route::resource('/comments', 'CommentController')->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::resource('/comments', 'CommentController');
+    Route::delete('/{id}', 'PostController@destroy');
+    Route::put('/{id}', 'PostController@update');
+    Route::delete('/{post}/comments/{id}', 'CommentController@destroy');
 });
 
-Route::put('user/{id}', 'UserController@update');
+Route::group(['prefix' => 'user'], function (){
+    Route::resource('/', 'UserController');
+});
 
 //Route::delete('posts/{id}', 'PostController@destroy');
 //Route::put('posts/{id}', 'PostController@update');

@@ -5,8 +5,8 @@ class CommentApi extends Api {
         return this.axios.get('/posts/comments/')
     }
 
-    destroy (id) {
-        return this.axios.delete('/posts/comments/' + id)
+    destroy (postId, commentId) {
+        return this.axios.delete(`/posts/${postId}/comments/` + commentId)
     }
 
     store (postId, commentData) {

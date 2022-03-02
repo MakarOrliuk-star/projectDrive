@@ -30,15 +30,18 @@
           :key="index"
         ) {{comment.content}}
           .comment-btn-delete(
-            @click="$emit('deleteComment', comment.id)"
+            @click="deleteComment"
           ) Delete
 </template>
 
 <script>
 import Comment from "@/components/post/comment/Comment";
 import {mapGetters} from "vuex";
+import scrollToTop from "@/mixins/scrollToTop";
 
 export default {
+  mixins:[scrollToTop],
+
   components:{
     Comment
   },
@@ -61,14 +64,18 @@ export default {
     },
 
     deletePost(){
+      this.scrollToTop()
       this.$emit('delete');
     },
 
     editPost(){
       this.$emit('edit');
+      this.scrollToTop()
     },
-    deleteComment(){
-      this.$emit('deleteComment');
+    deleteComment(commentId){
+      console.log(this.post.comments)
+      this.post.comments.id = commentId
+      this.$emit('deleteComment', commentId);
     }
   },
 }
@@ -102,6 +109,7 @@ export default {
 .feed_post-content-comments{
   display: flex;
   justify-content: space-between;
+  margin: 15px;
 }
 
 .comment-btn-delete{

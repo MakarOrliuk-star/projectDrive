@@ -28,8 +28,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('create-post-with-avatar', function (User $user){
-            return $user->image != null;
+        Gate::define('create-post-with-avatar', function ($user){
+            return $user->image !== null;
         });
     }
 }
