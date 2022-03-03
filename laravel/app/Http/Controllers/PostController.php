@@ -19,12 +19,12 @@ class PostController extends Controller
 
     public function index()
     {
-//        $user = Auth::user();
+        $user = Auth::user();
         $posts = Post::all()->load('comments');
 
-//        if ($user->can('view', $posts)) {
-//            return true;
-//        }
+        if ($user->can('view', $posts)) {
+            return false;
+        }
 
         return PostResource::collection($posts);
     }

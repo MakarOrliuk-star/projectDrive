@@ -49,10 +49,6 @@ export default {
     Comment
   },
 
-  computed:{
-    ...mapGetters(['getUser']),
-  },
-
   props:{
     post: {
       type: Object,
@@ -77,9 +73,7 @@ export default {
     },
 
     deleteComment(commentToRemove){
-      console.log(commentToRemove.id)
       this.post.comments = this.post.comments.filter(comment => comment !== commentToRemove)
-
       CommentApi.destroy(commentToRemove.id)
       .then(() => {
         this.$toaster.success('Комментарий успешно удален')
@@ -87,13 +81,11 @@ export default {
       .catch(error => {
         console.log(error)
       })
-      //  console.log(this.post.comments)
-      //  for(var i = 0; i < this.post.comments.length;i++){
-      //    console.log(this.post.comments[i].id + ' ' + this.post.comments[i].content);
-      //  }
-      //
-      // this.$emit('deleteComment');
     }
+  },
+
+  computed:{
+    ...mapGetters(['getUser']),
   },
 }
 </script>

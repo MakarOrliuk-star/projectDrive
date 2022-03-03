@@ -47,16 +47,9 @@ import AuthApi from '@/api/Auth'
 import { required, minLength, email, maxLength } from 'vuelidate/lib/validators'
 
 export default {
-
   created() {
     this.submitted = true;
     return this.$v.$touch();
-  },
-
-  computed: {
-    isDisabled() {
-      return this.$v.$invalid;
-    },
   },
 
   data() {
@@ -128,6 +121,12 @@ export default {
         maxLength: maxLength(19),
       },
     }
+  },
+
+  computed: {
+    isDisabled() {
+      return this.$v.$invalid;
+    },
   },
 }
 </script>

@@ -54,8 +54,8 @@ import PopupProfile from "@/components/profile/contact/PopupProfile";
 import {mapGetters} from 'vuex'
 
 export default {
-  computed:{
-    ...mapGetters(['getUser']),
+  components:{
+    PopupProfile
   },
 
   data(){
@@ -63,14 +63,16 @@ export default {
       isShow: false
     }
   },
-  components:{
-    PopupProfile
-  },
+
   methods:{
     togglePopup() {
       this.isShow = !this.isShow;
     },
-  }
+  },
+
+  computed:{
+    ...mapGetters(['getUser']),
+  },
 }
 </script>
 
