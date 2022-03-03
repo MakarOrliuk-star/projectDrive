@@ -29,22 +29,14 @@ import PostApi from "@/api/Post";
 import CommentApi from "@/api/Comment";
 import {mapGetters} from 'vuex'
 
-// mixins, components, props, data, watch, created, mounted, updated, methods, computed
-
 export default {
-  computed: {
-    editingPost() {
-      return this.editingPostId && this.posts.find(post => post.id === this.editingPostId);
-    },
-    ...mapGetters(['getUser']),
-  },
-
   components: {
     ButtonFeed,
     MenuFeed,
     ModalWindow,
     PostFeed
   },
+
   data() {
     return {
       showPostModalWindow: false,
@@ -53,6 +45,7 @@ export default {
       comments: null,
     }
   },
+
   mounted() {
     this.getPosts()
   },
@@ -72,9 +65,9 @@ export default {
       PostApi.store(post)
           .then(resp => {
             console.log(resp)
-            if (resp.data === ''){
+            if (resp.data === '') {
               this.$toaster.error('Добавьте аватарку для создания поста.')
-            } else{
+            } else {
               this.posts.push(resp.data.data)
               this.$toaster.success('Пост успешно создан')
             }
@@ -125,7 +118,7 @@ export default {
     commentCreate(post) {
       let filteredArray = post.comments.filter(e => typeof e === 'string')
       console.log(filteredArray)
-      let form ={
+      let form = {
         content: filteredArray.toString()
       }
       CommentApi.store(post.id, form)
@@ -136,6 +129,13 @@ export default {
             console.log(error)
           })
     },
+  },
+
+  computed: {
+    editingPost() {
+      return this.editingPostId && this.posts.find(post => post.id === this.editingPostId);
+    },
+    ...mapGetters(['getUser']),
   },
 }
 </script>

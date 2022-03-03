@@ -34,10 +34,6 @@ import {mapGetters} from 'vuex'
 import Cookies from "js-cookie";
 
 export default {
-  computed:{
-    ...mapGetters(['getUser']),
-  },
-
   methods:{
     logOut(){
       AuthApi.logout()
@@ -49,6 +45,10 @@ export default {
         console.log(error)
       })
     }
+  },
+
+  computed:{
+    ...mapGetters(['getUser']),
   },
 }
 </script>

@@ -33,7 +33,6 @@ div.profile_position
 
 <script>
 export default {
-
   props:{
     previewInfo: {
       type: Object,

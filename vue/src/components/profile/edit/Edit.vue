@@ -67,9 +67,10 @@ export default {
     return this.$v.$touch();
   },
 
-  computed: {
-    isDisabled() {
-      return this.$v.$invalid;
+  props:{
+    user: {
+      type: Object,
+      default: () => {}
     },
   },
 
@@ -85,13 +86,6 @@ export default {
       },
       submitted: false,
     }
-  },
-
-  props:{
-    user: {
-      type: Object,
-      default: () => {}
-    },
   },
 
   methods:{
@@ -146,6 +140,12 @@ export default {
       aboutYou: {
         required
       },
+    },
+  },
+
+  computed: {
+    isDisabled() {
+      return this.$v.$invalid;
     },
   },
 }

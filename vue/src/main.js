@@ -17,8 +17,6 @@ Vue.use(Toaster, {timeout: 5000})
 
 Vue.filter('apiFile', value => '/storage' + value)
 
-//Vue.config.productionTip = false
-
 new Vue({
   store,
   router,

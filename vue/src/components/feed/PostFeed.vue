@@ -17,15 +17,15 @@
 import Post from "@/components/feed/post/Post";
 
 export default {
+  components: {
+    Post,
+  },
+
   props: {
     posts: {
       type: Array,
       default: () => []
     },
-  },
-
-  components: {
-    Post,
   },
 
   methods:{

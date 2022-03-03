@@ -14,25 +14,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::group(['prefix' => 'auth', 'middleware' => ['jwt.auth', 'jwt.refresh']], function() {
     Route::post('me', 'AuthController@me');
 });
-
-//Route::group(['middleware' => ['jwt.auth', 'jwt.refresh']], function() {
-//Route::group(['prefix' => 'auth'],function() {
-//    Route::post('me', 'AuthController@me');
-//});
-//    Route::group(['prefix' => 'posts'], function() {
-//        Route::resource('/', 'PostController')->only(['index', 'store', 'show', 'update', 'destroy']);
-//        Route::resource('/{post}/comments', 'CommentController');
-//        Route::resource('/comments', 'CommentController')->only(['index', 'store', 'show', 'update', 'destroy']);
-//    });
-//});
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('register', 'RegisterController@register');
@@ -54,12 +38,3 @@ Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function() {
 Route::group(['prefix' => 'user'], function (){
     Route::resource('/', 'UserController');
 });
-
-//Route::delete('posts/{id}', 'PostController@destroy');
-//Route::put('posts/{id}', 'PostController@update');
-
-//Route::group(['prefix' => 'posts'], function (){
-//    Route::get('{id}/isliked', 'PostController@isLiked');
-//    Route::post('like', 'PostController@like');
-//});
-
