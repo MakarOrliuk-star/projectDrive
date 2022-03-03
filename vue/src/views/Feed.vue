@@ -65,7 +65,7 @@ export default {
       PostApi.store(post)
           .then(resp => {
             console.log(resp)
-            if (resp.data === '') {
+            if (!resp.data) {
               this.$toaster.error('Добавьте аватарку для создания поста.')
             } else {
               this.posts.push(resp.data.data)
@@ -116,9 +116,8 @@ export default {
     },
 
     commentCreate(post) {
-      let filteredArray = post.comments.filter(e => typeof e === 'string')
-      console.log(filteredArray)
-      let form = {
+      const filteredArray = post.comments.filter(e => typeof e === 'string')
+      const form = {
         content: filteredArray.toString()
       }
       CommentApi.store(post.id, form)

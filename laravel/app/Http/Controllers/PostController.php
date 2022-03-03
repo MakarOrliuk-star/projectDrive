@@ -23,7 +23,7 @@ class PostController extends Controller
         $posts = Post::all()->load('comments');
 
         if ($user->can('view', $posts)) {
-            return false;
+            return response()->json(['The user does not have permission to view comments ']);
         }
 
         return PostResource::collection($posts);
