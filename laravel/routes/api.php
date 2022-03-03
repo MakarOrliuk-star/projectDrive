@@ -48,7 +48,7 @@ Route::group(['prefix' => 'posts', 'middleware' => ['auth']], function() {
     Route::resource('/comments', 'CommentController');
     Route::delete('/{id}', 'PostController@destroy');
     Route::put('/{id}', 'PostController@update');
-    Route::delete('/{post}/comments/{id}', 'CommentController@destroy');
+    Route::delete('/comments/{id}', 'CommentController@destroy');
 });
 
 Route::group(['prefix' => 'user'], function (){

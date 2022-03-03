@@ -19,12 +19,10 @@ class CommentController extends Controller
     }
 
     public function store(Post $post, CommentRequest $request){
-
-          $comment = $post->comments()->create([
+        $comment = $post->comments()->create([
               'content' => $request['content'],
               'user_id' => auth()->user()->id
           ]);
-
         return new CommentResource($comment);
 
     }

@@ -26,11 +26,11 @@
       )
       div
         .feed_post-content-comments(
-          v-for="(comment, index) in  post.comments"
-          :key="index"
+          v-for="comment in  post.comments"
+          :key="comment.content"
         ) {{comment.content}}
           .comment-btn-delete(
-            @click="deleteComment"
+            @click="deleteComment(comment)"
           ) Delete
 </template>
 
@@ -38,6 +38,7 @@
 import Comment from "@/components/post/comment/Comment";
 import {mapGetters} from "vuex";
 import scrollToTop from "@/mixins/scrollToTop";
+import CommentApi from "@/api/Comment"
 
 export default {
   mixins:[scrollToTop],
@@ -72,10 +73,24 @@ export default {
       this.$emit('edit');
       this.scrollToTop()
     },
-    deleteComment(commentId){
-      console.log(this.post.comments)
-      this.post.comments.id = commentId
-      this.$emit('deleteComment', commentId);
+
+    deleteComment(commentToRemove){
+      console.log(commentToRemove.id)
+      this.post.comments = this.post.comments.filter(comment => comment !== commentToRemove)
+
+      CommentApi.destroy(commentToRemove.id)
+      .then(resp => {
+        console.log(resp)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      //  console.log(this.post.comments)
+      //  for(var i = 0; i < this.post.comments.length;i++){
+      //    console.log(this.post.comments[i].id + ' ' + this.post.comments[i].content);
+      //  }
+      //
+      // this.$emit('deleteComment');
     }
   },
 }

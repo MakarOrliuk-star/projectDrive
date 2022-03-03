@@ -9,7 +9,6 @@
         @editButtonClicked="setEditingPost"
         @deleteButtonClicked="deletePost"
         @commentClick="commentCreate"
-        @toggleDeleteComment="toggleDeleteCommentId"
       )
       MenuFeed
       ModulWindow(
@@ -124,8 +123,10 @@ export default {
     },
 
     commentCreate(post) {
+      let filteredArray = post.comments.filter(e => typeof e === 'string')
+      console.log(filteredArray)
       let form ={
-        content: post.comments.toString(),
+        content: filteredArray.toString()
       }
       CommentApi.store(post.id, form)
           .then(resp => {
@@ -135,21 +136,6 @@ export default {
             console.log(error)
           })
     },
-
-    toggleDeleteCommentId(post) {
-      console.log(post)
-      let form = {
-        commentId: this.post.comments.id,
-      }
-      console.log(form)
-      CommentApi.destroy(post.id, form)
-          .then(resp => {
-            console.log(resp)
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    }
   },
 }
 </script>

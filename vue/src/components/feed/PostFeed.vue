@@ -29,9 +29,8 @@ export default {
   },
 
   methods:{
-    commentDelete(post){
-      this.posts= post
-      this.$emit('toggleDeleteComment', post);
+    commentDelete(){
+      this.$emit('toggleDeleteComment');
     },
   },
 }
