@@ -20,6 +20,7 @@ class PostResource extends JsonResource
             'image' =>  $this->image,
             'comments' => $this->whenLoaded('comments'),
             'created_at' => $this->created_at,
+            'sign' => $this->sign,
         ];
     }
 }

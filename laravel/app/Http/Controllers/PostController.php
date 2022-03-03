@@ -45,6 +45,7 @@ class PostController extends Controller
             }
 
             $post->title = $request->input('title');
+            $post->sign = $request->input('sign');
             $post->user_id = Auth::user()->id;
             $post->save();
             return new PostResource($post);

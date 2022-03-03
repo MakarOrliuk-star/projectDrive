@@ -18,7 +18,9 @@
         .comment-btn(@click.prevent="deletePost") Delete
         .comment-btn(@click.prevent="editPost") Edit
       p.feed_post-content-description
-        span username
+        span {{getUser && getUser.name}}
+        div(v-if="post.sign" )
+          div Комментарий пользователя: {{post.sign}}
       p.feed_post-content-description {{post.title}}
       p.feed_post-content-time {{ moment(post.created_at).format("h:mm:ss") }}
       Comment(
@@ -79,8 +81,8 @@ export default {
       this.post.comments = this.post.comments.filter(comment => comment !== commentToRemove)
 
       CommentApi.destroy(commentToRemove.id)
-      .then(resp => {
-        console.log(resp)
+      .then(() => {
+        this.$toaster.success('Комментарий успешно удален')
       })
       .catch(error => {
         console.log(error)

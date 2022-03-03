@@ -3,7 +3,7 @@
     .card-body
       .card-title Если забыл номер телефона, то напоминаю
       | {{user && user.phone ? user.phone : 'Введите ваш номер телефона в настройках'}}
-    .card_comment-btn(@click="closeModule") Close
+    .card_comment-btn(@click="closeModal") Close
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
   },
 
  methods:{
-   closeModule(){
+   closeModal(){
      this.$emit('close');
    }
  }

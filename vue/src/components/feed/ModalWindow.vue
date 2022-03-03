@@ -20,7 +20,7 @@
           input.create-new-post_form-control(
             type='text',
             required='',
-            v-model="posts.comment"
+            v-model="posts.sign"
             )
       .create-new-post_group-name
         button#btn.create-new-post.create-new-post_button.create-new-post_primary-color(
@@ -47,7 +47,7 @@ export default {
     return {
       posts: {
         title: null,
-        comment: null,
+        sign: null,
         image: null,
       }
     }

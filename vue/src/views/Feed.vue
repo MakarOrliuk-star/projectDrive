@@ -11,7 +11,7 @@
         @commentClick="commentCreate"
       )
       MenuFeed
-      ModulWindow(
+      ModalWindow(
         v-if="showPostModalWindow"
         @post-created="handlePostCreate"
         @post-updated="handlePostUpdate"
@@ -23,7 +23,7 @@
 <script>
 import ButtonFeed from "@/components/feed/ButtonFeed";
 import MenuFeed from "@/components/feed/MenuFeed";
-import ModulWindow from "@/components/feed/ModalWindow";
+import ModalWindow from "@/components/feed/ModalWindow";
 import PostFeed from "@/components/feed/PostFeed";
 import PostApi from "@/api/Post";
 import CommentApi from "@/api/Comment";
@@ -42,7 +42,7 @@ export default {
   components: {
     ButtonFeed,
     MenuFeed,
-    ModulWindow,
+    ModalWindow,
     PostFeed
   },
   data() {
