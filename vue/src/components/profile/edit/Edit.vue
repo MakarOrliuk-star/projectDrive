@@ -2,7 +2,7 @@
   .profile-edit_area
     .profile-edit_pic
       img(
-        :src="user && user.image ? /storage/ + user.image : 'storage/profile/user.jpg'",
+        :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
         alt=''
       )
     input#inpFile.create-new-post_form-control(type='file' @change="uploadImg")
@@ -10,7 +10,7 @@
     input.profile-edit_input(
       type='text'
       v-model="infoProfiles.name"
-      :placeholder= "user && user.name ? user.name : 'Введите ваше имя'"
+      :placeholder= "getUser && getUser.name ? getUser.name : 'Введите ваше имя'"
     )
     span.invalid-feedback(
       v-if="!$v.infoProfiles.name.required"
@@ -22,7 +22,7 @@
     input.profile-edit_input(
       type='text'
       v-model="infoProfiles.lastname"
-      :placeholder= "user && user.lastname ? user.lastname : 'Введите вашу фамилию'"
+      :placeholder= "getUser && getUser.lastname ? getUser.lastname : 'Введите вашу фамилию'"
     )
     span.invalid-feedback(
       v-if="!$v.infoProfiles.lastname.required"
@@ -31,7 +31,7 @@
     input.profile-edit_input(
       type="email"
       v-model="infoProfiles.email"
-      :placeholder= "user && user.email ? user.email : 'Введите ваш email'"
+      :placeholder= "getUser && getUser.email ? getUser.email : 'Введите ваш email'"
     )
     span.invalid-feedback(
       v-if="!$v.infoProfiles.email.required"
@@ -40,7 +40,7 @@
     input.profile-edit_input(
       type='text'
       v-model="infoProfiles.phone"
-      :placeholder= "user && user.phone ? user.phone : 'Введите ваш номер телефона'"
+      :placeholder= "getUser && getUser.phone ? getUser.phone : 'Введите ваш номер телефона'"
     )
     span.invalid-feedback(
       v-if="!$v.infoProfiles.phone.required"
@@ -60,18 +60,12 @@
 
 <script>
 import {required, email} from 'vuelidate/lib/validators'
+import {mapGetters} from 'vuex'
 
 export default {
   created() {
     this.submitted = true;
     return this.$v.$touch();
-  },
-
-  props:{
-    user: {
-      type: Object,
-      default: () => {}
-    },
   },
 
   data(){
@@ -147,6 +141,7 @@ export default {
     isDisabled() {
       return this.$v.$invalid;
     },
+    ...mapGetters(['getUser']),
   },
 }
 </script>

@@ -1,7 +1,6 @@
 <template lang="pug">
   .profile-edit
     Edit(
-      :user="getUser"
       @profileInfo="getPreviewInfo"
     )
     ButtonProfile(@click="toggleInfoWindow")
@@ -19,7 +18,6 @@ import UserApi from "@/api/User";
 import {mapGetters} from "vuex";
 
 export default {
-
   computed:{
     ...mapGetters(['getUser']),
   },
