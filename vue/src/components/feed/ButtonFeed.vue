@@ -1,6 +1,6 @@
 <template lang="pug">
   .feed_button-create
-    button.feed_button-create-post(type='button', name='foo', value='upvote', @click="$emit('click')") Create post
+    button.feed_button-create-post(type='button', name='foo', value='upvote', @click="$emit('click')") Создать пост
 </template>
 
 <script>

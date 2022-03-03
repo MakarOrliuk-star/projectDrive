@@ -7,6 +7,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+//        $user = Auth::user();
+        $posts = Post::all()->load('comments');
+
+//        if ($user->can('view', $posts)) {
+//            return true;
+//        }
 
         return PostResource::collection($posts);
     }
@@ -26,22 +32,24 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = new Post();
+        if (Gate::allows('create-post-with-avatar', $post)) {
+            if ($request->image) {
+                $base64File = $request->image;
 
-        if($request->image) {
-            $base64File = $request->image;
+                $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
+                $extension = explode('/', mime_content_type($base64File))[1];
+                $fileName = "/publications/" . time() . '.' . $extension;
+                Storage::disk('public')->put($fileName, $fileData);
 
-            $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
-            $extension = explode('/', mime_content_type($base64File))[1];
-            $fileName = "/publications/" . time() . '.' . $extension;
-            Storage::disk('public')->put($fileName , $fileData);
+                $post->image = $fileName;
+            }
 
-            $post->image = $fileName;
+            $post->title = $request->input('title');
+            $post->sign = $request->input('sign');
+            $post->user_id = Auth::user()->id;
+            $post->save();
+            return new PostResource($post);
         }
-
-        $post->title = $request->input('title');
-        $post->user_id = Auth::user()->id;
-        $post->save();
-        return new PostResource($post);
     }
 
     public function show(Post $post)
@@ -51,9 +59,7 @@ class PostController extends Controller
 
     public function update(PostRequest $request, $id)
     {
-
         $post = Post::find($id);
-
         if($request->image) {
             $base64File = $request->image;
 
@@ -75,6 +81,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $post->comments()->delete();
         $post-> delete();
 
         return response()->json(['Post Has Been Deleted']);

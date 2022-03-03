@@ -1,17 +1,16 @@
 import Api from './Api'
 
 class CommentApi extends Api {
-
-    store (data) {
-        return this.axios.post(`/comments`, data)
-    }
-
     index(){
-        return this.axios.get('/comments')
+        return this.axios.get('/posts/comments/')
     }
 
-    destroy (id) {
-        return this.axios.delete('/comments/' + id)
+    destroy (commentId) {
+        return this.axios.delete(`/posts/comments/` + commentId)
+    }
+
+    store (postId, commentData) {
+        return this.axios.post(`/posts/${postId}/comments`, commentData)
     }
 }
 

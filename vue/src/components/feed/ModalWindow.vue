@@ -20,7 +20,7 @@
           input.create-new-post_form-control(
             type='text',
             required='',
-            v-model="posts.comment"
+            v-model="posts.sign"
             )
       .create-new-post_group-name
         button#btn.create-new-post.create-new-post_button.create-new-post_primary-color(
@@ -30,7 +30,7 @@
           | Send
           | Post
       span.create-new-post_close(
-        @click="closeModule"
+        @click="closeModal"
       ) X
 </template>
 
@@ -47,7 +47,7 @@ export default {
     return {
       posts: {
         title: null,
-        comment: null,
+        sign: null,
         image: null,
       }
     }
@@ -60,7 +60,7 @@ export default {
   },
 
   methods: {
-    closeModule() {
+    closeModal() {
       this.$emit('close');
     },
 
@@ -81,5 +81,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/scss/pages/feed/modul.scss";
+@import "../../assets/scss/pages/feed/modall";
 </style>

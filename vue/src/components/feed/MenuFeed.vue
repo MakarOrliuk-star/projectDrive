@@ -11,8 +11,6 @@
       button.feed_profile-action-btn Follow
     p.feed_profile-suggestion-text Suggestions for you
     .feed_profile-card(v-for="follower in followers" :key="follower.id")
-      .feed_profile-pic
-        img(:src='follower.imgSrc', alt='')
       div
         p.feed_username-profile {{ follower.channel }}
         p.feed_profile-sub-text {{ follower.status }}
@@ -37,7 +35,6 @@ export default {
           id: i,
           channel: `Channel ${i}`,
           status: 'followed by user',
-          imgSrc: ''
         })
       }
     }, 5000);

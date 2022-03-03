@@ -7,10 +7,11 @@ import 'materialize-css/dist/css/materialize.min.css'
 import moment from 'moment'
 import Toaster from 'v-toaster'
 import 'v-toaster/dist/v-toaster.css'
-
+import Vuelidate from 'vuelidate'
 
 Vue.prototype.moment = moment
 
+Vue.use(Vuelidate)
 Vue.use(VueCompositionAPI);
 Vue.use(Toaster, {timeout: 5000})
 

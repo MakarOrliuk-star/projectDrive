@@ -8,10 +8,8 @@
         :post="post"
         @delete="$emit('deleteButtonClicked', post.id)"
         @edit="$emit('editButtonClicked', post)"
-        @getComment="storeCommentClick"
-        :comments="comments"
+        @getComment="$emit('commentClick', post)"
         @deleteComment="commentDelete"
-        :user="user"
       )
 </template>
 
@@ -24,14 +22,6 @@ export default {
       type: Array,
       default: () => []
     },
-    comments: {
-      type: Array,
-      default: () => []
-    },
-    user: {
-      type: Object,
-      default: () => {}
-    }
   },
 
   components: {
@@ -39,12 +29,8 @@ export default {
   },
 
   methods:{
-    storeCommentClick(getComment){
-      this.$emit('commentClick', getComment);
-    },
-
-    commentDelete(commentId){
-      this.$emit('toggleDeleteComment', commentId);
+    commentDelete(){
+      this.$emit('toggleDeleteComment');
     },
   },
 }
@@ -55,10 +41,6 @@ export default {
 
 .feed_background {
   grid-row-start: 1;
-}
-
-.feed_post-comment-add {
-  margin: 2% !important;
 }
 
 ::-webkit-input-placeholder {

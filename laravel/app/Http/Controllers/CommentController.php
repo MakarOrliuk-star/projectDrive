@@ -13,27 +13,24 @@ class CommentController extends Controller
 {
     public function index(){
 
+        $this->authorize('view', auth()->user()) ;
         $comments = Comment::all();
         return CommentResource::collection($comments);
     }
 
-    public function store(CommentRequest $request){
-
-        $post = Post::with('comments')->first();
-
-        $comment = new Comment;
-        $comment->content = $request->input('content');
-        $comment->user_id =  Auth::user()->id;
-        $comment->post_id =  $post->id;
-        $comment->save();
-
+    public function store(Post $post, CommentRequest $request){
+        $comment = $post->comments()->create([
+              'content' => $request['content'],
+              'user_id' => auth()->user()->id
+          ]);
         return new CommentResource($comment);
 
     }
 
-    public function show(Comment $comment)
+    public function show($id)
     {
-        return $comment;
+        $comment = Comment::findOrFail($id);
+        return  new CommentResource($comment);
     }
 
     public function update(CommentRequest $request, $id)

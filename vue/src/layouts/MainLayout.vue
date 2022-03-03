@@ -14,11 +14,6 @@
             @click="$router.push({ name: 'profile' })"
           )
           img.feed_icon-profile(
-            src='../assets/img/feed/exp.png',
-            alt='',
-            @click="$router.push({name: 'login'})"
-          )
-          img.feed_icon-profile(
             src='../assets/img/feed/settings.png',
             alt=""
             @click="$router.push({name: 'editProfile'})"
@@ -27,20 +22,55 @@
             :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
           )
           p.feed_icon-profile.user-profile {{getUser && getUser.name}}
+        button.feed_button-create-post(
+          @click="logOut"
+        ) Выйти
     router-view
 </template>
 
 <script>
+import AuthApi from "@/api/Auth";
 import {mapGetters} from 'vuex'
+import Cookies from "js-cookie";
 
 export default {
   computed:{
     ...mapGetters(['getUser']),
   },
+
+  methods:{
+    logOut(){
+      AuthApi.logout()
+      .then(() => {
+        Cookies.remove('userToken','access_token')
+        this.$router.push({name: 'login'})
+      })
+      .then(error => {
+        console.log(error)
+      })
+    }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+
+.feed_button-create-post{
+  color: #00ad5f;
+  border: 1px solid #00ad5f;
+  border-radius: 5px;
+  transform: translate(-50%, 0);
+  cursor: pointer;
+  background-color: #fff;
+  transition: all .3s linear;
+}
+
+.feed_button-create-post:hover {
+  color: #fff;
+  border: 1px solid #00ad5f;
+  background-color: #00ad5f;
+}
+
 .feed {
   width: 100%;
   min-height: 100vh;

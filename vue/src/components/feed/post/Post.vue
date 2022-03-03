@@ -3,10 +3,10 @@
     .feed_post-info
       .feed_post-info-user
         img.feed_profile-pic(
-          :src="user && user.image ? /storage/ + user.image : 'storage/profile/user.jpg'",
+          :src="getUser && getUser.image ? /storage/ + getUser.image : 'storage/profile/user.jpg'",
           alt=""
         )
-        .feed_username-post {{user && user.name}}
+        .feed_username-post {{getUser && getUser.name}}
     img(
       :src="post.image | apiFile",
       class="post_image-profile",
@@ -18,29 +18,39 @@
         .comment-btn(@click.prevent="deletePost") Delete
         .comment-btn(@click.prevent="editPost") Edit
       p.feed_post-content-description
-        span username
+        span {{getUser && getUser.name}}
+        div(v-if="post.sign" )
+          div Комментарий пользователя: {{post.sign}}
       p.feed_post-content-description {{post.title}}
       p.feed_post-content-time {{ moment(post.created_at).format("h:mm:ss") }}
       Comment(
         @commentPost ="getCommentPost"
-        :comment="comments"
       )
       div
-        div.feed_post-content-comments(
-          v-for="(comment, index) in  comments"
-          :key="index"
+        .feed_post-content-comments(
+          v-for="comment in  post.comments"
+          :key="comment.content"
         ) {{comment.content}}
-          div.comment-btn-delete(
-            @click="$emit('deleteComment', comment.id)"
+          .comment-btn-delete(
+            @click="deleteComment(comment)"
           ) Delete
 </template>
 
 <script>
 import Comment from "@/components/post/comment/Comment";
+import {mapGetters} from "vuex";
+import scrollToTop from "@/mixins/scrollToTop";
+import CommentApi from "@/api/Comment"
 
 export default {
+  mixins:[scrollToTop],
+
   components:{
     Comment
+  },
+
+  computed:{
+    ...mapGetters(['getUser']),
   },
 
   props:{
@@ -48,31 +58,41 @@ export default {
       type: Object,
       default: () => {}
     },
-    comments: {
-      type: Array,
-      default: () => []
-    },
-    user: {
-      type: Object,
-      default: () => {}
-    },
   },
 
   methods:{
     getCommentPost(comment){
-      this.post['content'] = comment
-      this.$emit('getComment', this.post);
+      this.post.comments.push(comment)
+      this.$emit('getComment');
     },
 
     deletePost(){
+      this.scrollToTop()
       this.$emit('delete');
     },
 
     editPost(){
       this.$emit('edit');
+      this.scrollToTop()
     },
-    deleteComment(){
-      this.$emit('deleteComment');
+
+    deleteComment(commentToRemove){
+      console.log(commentToRemove.id)
+      this.post.comments = this.post.comments.filter(comment => comment !== commentToRemove)
+
+      CommentApi.destroy(commentToRemove.id)
+      .then(() => {
+        this.$toaster.success('Комментарий успешно удален')
+      })
+      .catch(error => {
+        console.log(error)
+      })
+      //  console.log(this.post.comments)
+      //  for(var i = 0; i < this.post.comments.length;i++){
+      //    console.log(this.post.comments[i].id + ' ' + this.post.comments[i].content);
+      //  }
+      //
+      // this.$emit('deleteComment');
     }
   },
 }
@@ -106,6 +126,7 @@ export default {
 .feed_post-content-comments{
   display: flex;
   justify-content: space-between;
+  margin: 15px;
 }
 
 .comment-btn-delete{

@@ -3,33 +3,30 @@
     input.feed_post-comment-add(
       type='text'
       placeholder="Please enter your comment"
-      v-model="comments"
+      v-model="content"
     )
-    .comment-btn(@click="PostComment")
-      img( src="@/assets/img/background/send.jpg", class="feed_icon-profile", alt="" )
+    .comment-btn(@click="postCommentClickButton")
+      img(
+        src="@/assets/img/feed/sendImage.png",
+        class="feed_icon-profile",
+        alt=""
+      )
 </template>
 
 <script>
 export default {
   data(){
     return{
-      comments: null,
+      content: null,
     }
   },
 
-  props:{
-    comment: {
-      type: Array,
-      default: () => []
-    },
-  },
-
   methods:{
-    PostComment(){
-      if(this.comments){
-        this.$emit('commentPost', this.comments)
+    postCommentClickButton(){
+      if(this.content){
+        this.$emit('commentPost', this.content)
       }
-      this.comments = ''
+      this.content = ''
     }
   }
 }
@@ -50,6 +47,6 @@ export default {
 .comment-btn:hover {
   color: #fff;
   border: 1px solid #00ad5f;
-  background-color: #00ad5f;
+  background-color: #fff;
 }
 </style>
